@@ -1021,6 +1021,49 @@
     color: rgba(0,0,0,0.5);
   }
 
+  /* SOBRE */
+  .sobre { background: var(--black-3); }
+  .sobre-content {
+    max-width: 700px;
+    margin: 40px 0 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .sobre-content p {
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+  .sobre-valores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .sobre-valor {
+    background: var(--black-4);
+    padding: 40px 32px;
+  }
+  .sobre-valor-icon {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .sobre-valor-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .sobre-valor-text {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
   /* INSTAGRAM */
   .instagram { background: var(--black-2); }
   .instagram-header {
@@ -1273,6 +1316,7 @@
     .produtos-grid { grid-template-columns: 1fr 1fr; }
     .prod-card:first-child { grid-row: auto; }
     .social-grid { grid-template-columns: 1fr 1fr; }
+    .sobre-valores { grid-template-columns: 1fr 1fr; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .insta-grid { grid-template-columns: repeat(3, 1fr); }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 30px; }
@@ -1351,6 +1395,9 @@
     .social-grid { grid-template-columns: 1fr; }
     .review-card { padding: 28px 20px; }
 
+    /* Sobre */
+    .sobre-valores { grid-template-columns: 1fr; }
+
     /* Instagram */
     .instagram-header { flex-direction: column; align-items: flex-start; gap: 20px; }
     .insta-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1422,8 +1469,8 @@
     <li><a href="#produtos">Produtos</a></li>
     <li><a href="#protocolo">Protocolo</a></li>
     <li><a href="#kits">Kits</a></li>
-    <li><a href="#">Sobre</a></li>
-    <li><a href="#">Contato</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5599992007182" class="btn-primary">
     <span>Fazer Pedido</span>
@@ -1439,8 +1486,8 @@
     <li><a href="#produtos">Produtos</a></li>
     <li><a href="#protocolo">Protocolo</a></li>
     <li><a href="#kits">Kits</a></li>
-    <li><a href="#">Sobre</a></li>
-    <li><a href="#">Contato</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5599992007182" class="nav-cta">Fazer Pedido</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu">
@@ -1539,19 +1586,19 @@
   </div>
   <h2 class="section-title fade-up delay-1">LINHAS &amp; <em>CATEGORIAS</em></h2>
   <div class="categories-grid">
-    <a href="javascript:void(0)" class="cat-card fade-up">
+    <a href="#produtos" class="cat-card fade-up">
       <span class="cat-icon">🧴</span>
       <span class="cat-name">Óleos para Barba</span>
       <span class="cat-count">Hidratação · Crescimento · Brilho</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="javascript:void(0)" class="cat-card fade-up delay-1">
+    <a href="#produtos" class="cat-card fade-up delay-1">
       <span class="cat-icon">🫧</span>
       <span class="cat-name">Shampoo Barba</span>
       <span class="cat-count">Limpeza · Suavidade · Aroma</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="javascript:void(0)" class="cat-card fade-up delay-2">
+    <a href="#produtos" class="cat-card fade-up delay-2">
       <span class="cat-icon">🔥</span>
       <span class="cat-name">Balm Modelador</span>
       <span class="cat-count">Fixação · Modelagem · Nutrição</span>
@@ -1563,13 +1610,13 @@
       <span class="cat-count">Completos · Presentes · Profissional</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="javascript:void(0)" class="cat-card fade-up delay-4">
+    <a href="#produtos" class="cat-card fade-up delay-4">
       <span class="cat-icon">💈</span>
       <span class="cat-name">Pomadas Capilares</span>
       <span class="cat-count">Efeito · Fixação · Acabamento</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="javascript:void(0)" class="cat-card fade-up delay-5">
+    <a href="#produtos" class="cat-card fade-up delay-5">
       <span class="cat-icon">🧼</span>
       <span class="cat-name">Skincare Masculino</span>
       <span class="cat-count">Limpeza · Anti-aging · Proteção</span>
@@ -1654,7 +1701,7 @@
       </div>
       <h2 class="section-title fade-up delay-1">PRODUTOS <em>EM<br>DESTAQUE</em></h2>
     </div>
-    <a href="javascript:void(0)" class="btn-secondary fade-up delay-2" style="align-self: flex-end;">Ver Tudo →</a>
+    <a href="https://wa.me/5599992007182?text=Quero+ver+o+catálogo+completo" class="btn-secondary fade-up delay-2" style="align-self: flex-end;">Ver Tudo →</a>
   </div>
 
   <div class="produtos-grid" id="kits">
@@ -1691,7 +1738,7 @@
 
     <div class="prod-card fade-up delay-2">
       <div class="prod-visual" style="height:220px;">
-        <div class="prod-placeholder" style="font-size:60px;">BALM</div>
+        <img src="prod-balm%20fox%20for%20man.png" alt="Balm Hidratante Fox For Men" loading="lazy">
       </div>
       <div class="prod-info">
         <div class="prod-brand">Fox For Men</div>
@@ -1787,6 +1834,36 @@
   </div>
 </section>
 
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="section-label fade-up">
+    <span class="section-label-line"></span>
+    <span>Quem somos</span>
+  </div>
+  <h2 class="section-title fade-up delay-1">SOBRE A <em>QUASAR</em></h2>
+  <div class="sobre-content fade-up delay-2">
+    <p>A Quasar Barber nasceu em Codó, Maranhão, com um propósito claro: levar ao interior produtos profissionais de barba e cabelo que antes só chegavam às grandes cidades. Trabalhamos com as melhores marcas do mercado — Fox For Men e QOD Barber Shop — para garantir qualidade real em cada pedido.</p>
+    <p>Mais do que uma distribuidora, somos referência em cuidado masculino no Maranhão. Atendimento rápido pelo WhatsApp, entrega no mesmo dia em Codó e consultoria gratuita para montar seu protocolo ideal.</p>
+  </div>
+  <div class="sobre-valores fade-up delay-3">
+    <div class="sobre-valor">
+      <div class="sobre-valor-icon">★</div>
+      <div class="sobre-valor-title">Qualidade</div>
+      <div class="sobre-valor-text">Só produtos originais das melhores marcas do mercado</div>
+    </div>
+    <div class="sobre-valor">
+      <div class="sobre-valor-icon">⚡</div>
+      <div class="sobre-valor-title">Agilidade</div>
+      <div class="sobre-valor-text">Entrega no mesmo dia em Codó, MA</div>
+    </div>
+    <div class="sobre-valor">
+      <div class="sobre-valor-icon">💬</div>
+      <div class="sobre-valor-title">Atendimento</div>
+      <div class="sobre-valor-text">Suporte direto pelo WhatsApp, sempre disponível</div>
+    </div>
+  </div>
+</section>
+
 <!-- INSTAGRAM -->
 <section class="instagram">
   <div class="instagram-header">
@@ -1831,7 +1908,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contato">
   <div class="footer-top">
     <div>
       <div class="footer-brand-name">QUASAR<span>.</span></div>
@@ -1843,9 +1920,9 @@
         <a href="https://instagram.com/quasar_barber">
           <span class="contact-icon">📸</span> @quasar_barber
         </a>
-        <a href="javascript:void(0)">
+        <span style="display:flex;align-items:center;gap:8px;">
           <span class="contact-icon">📍</span> Codó, Maranhão
-        </a>
+        </span>
       </div>
     </div>
     <div>
@@ -1855,19 +1932,19 @@
         <li><a href="#produtos">Produtos</a></li>
         <li><a href="#protocolo">Protocolo Quasar</a></li>
         <li><a href="#kits">Kits</a></li>
-        <li><a href="javascript:void(0)">Sobre Nós</a></li>
-        <li><a href="javascript:void(0)">Contato</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#contato">Contato</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Linhas</div>
       <ul class="footer-links">
-        <li><a href="javascript:void(0)">Fox For Men</a></li>
-        <li><a href="javascript:void(0)">QOD Barber Shop</a></li>
-        <li><a href="javascript:void(0)">Óleos para Barba</a></li>
-        <li><a href="javascript:void(0)">Pomadas Capilares</a></li>
-        <li><a href="javascript:void(0)">Kits Premium</a></li>
-        <li><a href="javascript:void(0)">Skincare Masculino</a></li>
+        <li><a href="#produtos">Fox For Men</a></li>
+        <li><a href="#produtos">QOD Barber Shop</a></li>
+        <li><a href="#produtos">Óleos para Barba</a></li>
+        <li><a href="#produtos">Pomadas Capilares</a></li>
+        <li><a href="#kits">Kits Premium</a></li>
+        <li><a href="#produtos">Skincare Masculino</a></li>
       </ul>
     </div>
     <div>
@@ -1891,9 +1968,9 @@
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 <span>Quasar Barber</span> — Todos os direitos reservados</span>
     <ul class="footer-legal">
-      <li><a href="javascript:void(0)">Política de Privacidade</a></li>
-      <li><a href="javascript:void(0)">Termos de Uso</a></li>
-      <li><a href="javascript:void(0)">Trocas e Devoluções</a></li>
+      <li><a href="#">Política de Privacidade</a></li>
+      <li><a href="#">Termos de Uso</a></li>
+      <li><a href="#">Trocas e Devoluções</a></li>
     </ul>
   </div>
 </footer>
