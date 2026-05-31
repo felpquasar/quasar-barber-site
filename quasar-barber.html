@@ -1139,6 +1139,96 @@
   }
   .instagram-cta { text-align: center; }
 
+  /* CONTATO */
+  .contato-section { background: var(--black-3); }
+  .contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+  .contato-info-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .contato-detail {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+  .contato-detail:hover { color: var(--gold); }
+  .contato-detail-icon {
+    width: 44px; height: 44px;
+    background: var(--black-4);
+    border: 1px solid rgba(255,204,0,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .form-group { margin-bottom: 24px; }
+  .form-label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    background: var(--black-4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 2px solid rgba(255,204,0,0.3);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.25s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .form-input:focus,
+  .form-textarea:focus { border-bottom-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 130px; }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--black-4);
+    border: 1px solid rgba(255,204,0,0.2);
+  }
+  .form-success-icon { font-size: 40px; margin-bottom: 16px; }
+  .form-success-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .form-success-text {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  @media (max-width: 1100px) {
+    .contato-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
   /* FOOTER */
   footer {
     background: var(--black-2);
@@ -1916,8 +2006,69 @@
   </div>
 </section>
 
+<!-- CONTATO -->
+<section class="contato-section" id="contato">
+  <div class="section-label fade-up">
+    <span class="section-label-line"></span>
+    <span>Fale conosco</span>
+  </div>
+  <h2 class="section-title fade-up delay-1">ENTRE EM <em>CONTATO</em></h2>
+  <div class="contato-grid">
+    <div class="contato-info fade-up delay-2">
+      <div class="contato-info-title">Atendimento Quasar</div>
+      <a href="https://wa.me/5599992007182" class="contato-detail" target="_blank" rel="noopener">
+        <div class="contato-detail-icon">📱</div>
+        <div>
+          <div style="color:var(--white);font-weight:500;">WhatsApp</div>
+          <div style="font-size:13px;">(99) 99200-7182</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/quasar_barber" class="contato-detail" target="_blank" rel="noopener">
+        <div class="contato-detail-icon">📸</div>
+        <div>
+          <div style="color:var(--white);font-weight:500;">Instagram</div>
+          <div style="font-size:13px;">@quasar_barber</div>
+        </div>
+      </a>
+      <div class="contato-detail">
+        <div class="contato-detail-icon">📍</div>
+        <div>
+          <div style="color:var(--white);font-weight:500;">Localização</div>
+          <div style="font-size:13px;">Codó, Maranhão</div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up delay-2">
+      <form name="contato" method="POST" netlify id="contatoForm">
+        <input type="hidden" name="form-name" value="contato">
+        <div class="form-group">
+          <label class="form-label" for="nome">Nome</label>
+          <input class="form-input" type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="whatsapp">WhatsApp</label>
+          <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="(99) 9 9999-9999">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mensagem">Mensagem</label>
+          <textarea class="form-textarea" id="mensagem" name="mensagem" placeholder="Como podemos ajudar?" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+          <span>Enviar Mensagem</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✓</div>
+        <div class="form-success-title">Mensagem Enviada!</div>
+        <div class="form-success-text">Recebemos seu contato. Retornaremos em breve pelo WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
-<footer id="contato">
+<footer>
   <div class="footer-top">
     <div>
       <div class="footer-brand-name">QUASAR<span>.</span></div>
@@ -2073,6 +2224,24 @@
   featItems.forEach((item, i) => {
     item.addEventListener('click', () => setActiveStep(i));
   });
+
+  // Netlify Forms — inline success, no redirect
+  const contatoForm = document.getElementById('contatoForm');
+  const formSuccess = document.getElementById('formSuccess');
+  if (contatoForm) {
+    contatoForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const data = new FormData(contatoForm);
+      fetch('/', { method: 'POST', body: data })
+        .then(() => {
+          contatoForm.style.display = 'none';
+          formSuccess.style.display = 'block';
+        })
+        .catch(() => {
+          contatoForm.querySelector('[type=submit]').textContent = 'Erro — tente novamente';
+        });
+    });
+  }
 </script>
 </body>
 </html>
