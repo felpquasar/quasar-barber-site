@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Quasar Barber — Distribuidora premium de produtos para barba e cabelo em Codó, MA. Fox For Men, QOD Barber Shop, kits profissionais. Entrega grátis em Codó.">
 <title>Quasar Barber — Distribuidora Premium</title>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quasar-barber.netlify.app/">
+<meta property="og:title" content="Quasar Barber — Distribuidora Premium de Barba e Cabelo">
+<meta property="og:description" content="Produtos profissionais Fox For Men e QOD Barber Shop. Entrega grátis em Codó, MA. Atendimento pelo WhatsApp.">
+<meta property="og:image" content="https://quasar-barber.netlify.app/insta-greencoffee.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Quasar Barber">
+<!-- Twitter/X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quasar Barber — Distribuidora Premium de Barba e Cabelo">
+<meta name="twitter:description" content="Produtos profissionais Fox For Men e QOD Barber Shop. Entrega grátis em Codó, MA.">
+<meta name="twitter:image" content="https://quasar-barber.netlify.app/insta-greencoffee.png">
+<!-- Canonical -->
+<link rel="canonical" href="https://quasar-barber.netlify.app/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1084,29 +1101,21 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    display: block;
+    text-decoration: none;
   }
-  .insta-bg {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: rgba(255,204,0,0.04);
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 0.05em;
+  .insta-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
   }
-  /* Varied bg patterns for visual interest */
-  .insta-tile:nth-child(1) .insta-bg { background: linear-gradient(135deg, #1a1500 0%, #0d0d0d 100%); }
-  .insta-tile:nth-child(2) .insta-bg { background: linear-gradient(225deg, #150f00 0%, #0d0d0d 100%); }
-  .insta-tile:nth-child(3) .insta-bg { background: radial-gradient(ellipse at center, #1a1200 0%, #0a0a0a 70%); }
-  .insta-tile:nth-child(4) .insta-bg { background: linear-gradient(180deg, #0e0e0e 0%, #181200 100%); }
-  .insta-tile:nth-child(5) .insta-bg { background: linear-gradient(45deg, #0a0a0a 0%, #161000 100%); }
-  .insta-tile:nth-child(6) .insta-bg { background: radial-gradient(ellipse at top, #120d00 0%, #0d0d0d 60%); }
+  .insta-tile:hover .insta-img { transform: scale(1.05); }
   .insta-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(255,204,0,0.9);
+    background: rgba(8,8,8,0.55);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1116,17 +1125,17 @@
   }
   .insta-tile:hover .insta-overlay { opacity: 1; }
   .insta-icon {
-    font-size: 24px;
-    color: var(--black);
+    font-size: 28px;
+    color: var(--gold);
     margin-bottom: 6px;
   }
   .insta-type {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--black);
+    color: var(--white);
   }
   .instagram-cta { text-align: center; }
 
@@ -1880,30 +1889,30 @@
     </a>
   </div>
   <div class="insta-grid">
-    <div class="insta-tile fade-up">
-      <div class="insta-bg">REELS</div>
-      <div class="insta-overlay"><div class="insta-icon">▶</div><div class="insta-type">Reels</div></div>
-    </div>
-    <div class="insta-tile fade-up delay-1">
-      <div class="insta-bg">BEFORE<br>AFTER</div>
-      <div class="insta-overlay"><div class="insta-icon">📷</div><div class="insta-type">Antes/Depois</div></div>
-    </div>
-    <div class="insta-tile fade-up delay-2">
-      <div class="insta-bg">PRODUTOS</div>
-      <div class="insta-overlay"><div class="insta-icon">📦</div><div class="insta-type">Produtos</div></div>
-    </div>
-    <div class="insta-tile fade-up delay-1">
-      <div class="insta-bg">LIFE<br>STYLE</div>
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up">
+      <img src="insta-pomadas.png" alt="Pomadas Fox For Men" loading="lazy" class="insta-img">
+      <div class="insta-overlay"><div class="insta-icon">🎨</div><div class="insta-type">Pomadas</div></div>
+    </a>
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-1">
+      <img src="insta-lifestyle.jpeg" alt="QOD Whisky Lifestyle" loading="lazy" class="insta-img">
       <div class="insta-overlay"><div class="insta-icon">✨</div><div class="insta-type">Lifestyle</div></div>
-    </div>
-    <div class="insta-tile fade-up delay-2">
-      <div class="insta-bg">DICAS</div>
-      <div class="insta-overlay"><div class="insta-icon">💡</div><div class="insta-type">Dicas</div></div>
-    </div>
-    <div class="insta-tile fade-up delay-3">
-      <div class="insta-bg">KITS</div>
-      <div class="insta-overlay"><div class="insta-icon">🎁</div><div class="insta-type">Kits</div></div>
-    </div>
+    </a>
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-2">
+      <img src="insta-greencoffee.png" alt="QOD Green Coffee Shampoo" loading="lazy" class="insta-img">
+      <div class="insta-overlay"><div class="insta-icon">🌿</div><div class="insta-type">Shampoo</div></div>
+    </a>
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-1">
+      <img src="insta-kitbarba.jpeg" alt="Kit Barba Fox For Men" loading="lazy" class="insta-img">
+      <div class="insta-overlay"><div class="insta-icon">🪒</div><div class="insta-type">Kit Barba</div></div>
+    </a>
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-2">
+      <img src="insta-capilar.jpeg" alt="Fox For Men Capilar" loading="lazy" class="insta-img">
+      <div class="insta-overlay"><div class="insta-icon">💈</div><div class="insta-type">Capilar</div></div>
+    </a>
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-3">
+      <img src="insta-qod.png" alt="QOD Barber Shop Premium" loading="lazy" class="insta-img">
+      <div class="insta-overlay"><div class="insta-icon">⭐</div><div class="insta-type">QOD Premium</div></div>
+    </a>
   </div>
 </section>
 
