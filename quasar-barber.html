@@ -202,6 +202,7 @@
     color: var(--black);
     background: var(--gold);
     padding: 10px 24px;
+    border-radius: 6px;
     text-decoration: none;
     transition: all 0.2s;
   }
@@ -399,8 +400,8 @@
   .hero-actions {
     display: flex;
     align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 16px;
+    flex-wrap: nowrap;
   }
 
   .btn-primary {
@@ -933,6 +934,7 @@
     background: var(--gold);
     padding: 10px 20px;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.2s;
   }
@@ -1457,8 +1459,7 @@
     .seal-icon { width: 28px; height: 28px; }
     .seal-icon svg { width: 18px; height: 18px; }
 
-    /* Botões hero — empilham em telas estreitas */
-    .hero-actions { flex-wrap: wrap; gap: 12px; }
+    .hero-actions { gap: 12px; }
 
     /* Títulos de seção */
     .section-title { font-size: clamp(38px, 9vw, 64px); }
@@ -1514,10 +1515,9 @@
 
   /* RESPONSIVE — SMALL MOBILE 540px */
   @media (max-width: 540px) {
-    /* Botões hero empilhados e largura total */
-    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions { gap: 10px; }
     .hero-actions .btn-primary,
-    .hero-actions .btn-secondary { width: 100%; justify-content: center; padding: 15px 20px; }
+    .hero-actions .btn-secondary { justify-content: center; padding: 13px 16px; font-size: 11px; }
   }
 
   /* RESPONSIVE — SMALL MOBILE 480px */
@@ -1617,15 +1617,16 @@
       <span>Distribuidora Premium — Codó, MA</span>
     </div>
     <h1 class="hero-title fade-up delay-1">
-      SUA BARBA MERECE<br>
-      <em>PADRÃO PREMIUM</em>
+      Cuidado Masculino<br>
+       de verdade, montado <br>
+      <em>para você</em>
     </h1>
     <p class="hero-subtitle fade-up delay-2">
-      Distribuidora especializada em produtos profissionais para barba, cabelo e cuidados masculinos.
+      Fox For Men e QOD Barber Shop com consultoria gratuita de protocolo e entrega no mesmo dia em Codó — o que antes só existia nas capitais.
     </p>
     <div class="hero-actions fade-up delay-3">
       <a href="https://wa.me/5599992007182" class="btn-primary">
-        <span>Comprar Agora</span>
+        <span>Montar meu protocolo</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#produtos" class="btn-secondary">Ver Catálogo</a>
@@ -1740,7 +1741,7 @@
       <span class="section-label-line"></span>
       <span>Diferencial Quasar</span>
     </div>
-    <h2 class="protocolo-headline fade-up delay-1">NÃO VENDEMOS<br>PRODUTOS.</h2>
+    <h2 class="protocolo-headline fade-up delay-1">MAIS QUE ENTREGAR<br>PRODUTOS.</h2>
     <div class="protocolo-subline fade-up delay-2">ENTREGAMOS<br>RESULTADOS.</div>
     <p class="protocolo-text fade-up delay-3">
       O Protocolo Quasar identifica o tipo de barba do cliente e recomenda os produtos ideais para crescimento, hidratação, alinhamento e fortalecimento dos fios. Cada recomendação é personalizada para o seu perfil.
@@ -1814,7 +1815,7 @@
         <div class="prod-name">Kit Barba Completo Premium</div>
         <div class="prod-desc">Shampoo + Óleo + Balm. Tudo que sua barba precisa em um único kit profissional.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 89,90</div>
+          <div class="prod-price">R$ 119,90</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Kit+Barba+Completo+Fox+For+Men')">Pedir Agora</button>
         </div>
       </div>
@@ -1829,7 +1830,7 @@
         <div class="prod-name">Óleo Para Barba 25ml</div>
         <div class="prod-desc">Hidratação e toque seco. Beard oil profissional.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 34,90</div>
+          <div class="prod-price">R$ 36,90</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Óleo+Para+Barba+QOD')">Pedir</button>
         </div>
       </div>
@@ -1844,7 +1845,7 @@
         <div class="prod-name">Balm Hidratante Para Barba</div>
         <div class="prod-desc">Modela, hidrata e dá brilho natural aos fios.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 32,90</div>
+          <div class="prod-price">R$ 32,40</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Balm+Hidratante+Fox+For+Men')">Pedir</button>
         </div>
       </div>
@@ -1867,7 +1868,7 @@
 
     <div class="prod-card fade-up delay-2">
       <div class="prod-visual" style="height:220px;">
-        <div class="prod-badge" style="background: rgba(255,204,0,0.15); color: var(--gold); border: 1px solid var(--gold);">Novidade</div>
+        <div class="prod-badge" style="background: var(--gold); color: var(--black); border: 1px solid var(--gold);">Novidade</div>
         <img src="prod-kit-whisky.webp" alt="Kit Shampoo Whisky + Carteira QOD" loading="lazy">
       </div>
       <div class="prod-info">
@@ -1875,7 +1876,7 @@
         <div class="prod-name">Kit Shampoo Whisky + Carteira</div>
         <div class="prod-desc">Shampoo 220ml Black Collection + carteira exclusiva.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 49,90</div>
+          <div class="prod-price">R$ 55,00</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Kit+Shampoo+Whisky+%2B+Carteira+QOD')">Pedir</button>
         </div>
       </div>
@@ -2225,20 +2226,22 @@
     item.addEventListener('click', () => setActiveStep(i));
   });
 
-  // Netlify Forms — inline success, no redirect
+  // Netlify Forms — inline success + WhatsApp redirect
   const contatoForm = document.getElementById('contatoForm');
   const formSuccess = document.getElementById('formSuccess');
   if (contatoForm) {
     contatoForm.addEventListener('submit', e => {
       e.preventDefault();
       const data = new FormData(contatoForm);
+      const nome = data.get('nome') || '';
+      const whatsapp = data.get('whatsapp') || '';
+      const mensagem = data.get('mensagem') || '';
+      const texto = `Olá! Entrei em contato pelo site Quasar Barber.\n\nNome: ${nome}\nWhatsApp: ${whatsapp}\nMensagem: ${mensagem}`;
+      window.open('https://wa.me/5599992007182?text=' + encodeURIComponent(texto), '_blank');
       fetch('/', { method: 'POST', body: data })
-        .then(() => {
+        .finally(() => {
           contatoForm.style.display = 'none';
           formSuccess.style.display = 'block';
-        })
-        .catch(() => {
-          contatoForm.querySelector('[type=submit]').textContent = 'Erro — tente novamente';
         });
     });
   }
