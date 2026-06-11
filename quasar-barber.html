@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Quasar Barber — Distribuidora premium de produtos para barba e cabelo em Codó, MA. Fox For Men, QOD Barber Shop, kits profissionais. Entrega grátis em Codó.">
 <title>Quasar Barber — Distribuidora Premium</title>
-<!-- Open Graph -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080808'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='serif' font-size='20' fill='%23ffcc00'>Q</text></svg>">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quasar-barber.netlify.app/">
 <meta property="og:title" content="Quasar Barber — Distribuidora Premium de Barba e Cabelo">
@@ -15,1600 +15,983 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Quasar Barber">
-<!-- Twitter/X Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Quasar Barber — Distribuidora Premium de Barba e Cabelo">
 <meta name="twitter:description" content="Produtos profissionais Fox For Men e QOD Barber Shop. Entrega grátis em Codó, MA.">
 <meta name="twitter:image" content="https://quasar-barber.netlify.app/insta-greencoffee.png">
-<!-- Canonical -->
 <link rel="canonical" href="https://quasar-barber.netlify.app/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --gold: #ffcc00;
-    --gold-dim: #c9a000;
-    --gold-glow: rgba(255,204,0,0.15);
-    --black: #080808;
-    --black-2: #111111;
-    --black-3: #161616;
-    --black-4: #1e1e1e;
-    --gray: #2a2a2a;
-    --gray-2: #3a3a3a;
-    --text-dim: #888;
-    --text-mid: #999;
-    --white: #f4f4f4;
-  }
-
-  html { scroll-behavior: smooth; overflow-x: hidden; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* Disable custom cursor on touch devices */
-  @media (hover: none) {
-    body { cursor: auto; }
-    .cursor, .cursor-ring { display: none; }
-  }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed;
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: transform 0.08s ease;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 32px; height: 32px;
-    border: 1px solid rgba(255,204,0,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: all 0.18s ease;
-  }
-  body:hover .cursor { opacity: 1; }
-
-  /* NOISE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9997;
-    opacity: 0.35;
-  }
-
-  /* MOBILE NAV OVERLAY */
-  .nav-mobile-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 600;
-    background: var(--black);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .nav-mobile-overlay.open { display: flex; }
-  .nav-close {
-    position: absolute;
-    top: 28px; right: 28px;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 28px;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
-  }
-  .nav-close:hover { color: var(--gold); }
-  .nav-mobile-links {
-    list-style: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 40px;
-  }
-  .nav-mobile-links a {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    letter-spacing: 0.1em;
-    color: var(--text-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-    display: block;
-    padding: 4px 0;
-  }
-  .nav-mobile-links a:hover { color: var(--gold); }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 60px;
-    background: linear-gradient(180deg, rgba(8,8,8,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(2px);
-    transition: background 0.3s, backdrop-filter 0.3s;
-  }
-  nav.scrolled {
-    background: rgba(8,8,8,0.98);
-    backdrop-filter: blur(12px);
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.15em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--gold); }
-
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0; right: 0;
-    height: 1px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transition: transform 0.25s ease;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a:hover::after { transform: scaleX(1); }
-
-  .nav-cta {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 10px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .nav-cta:hover { background: #fff; transform: translateY(-1px); }
-
-  /* HAMBURGER */
-  .nav-hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .nav-hamburger span {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: var(--white);
-    transition: all 0.3s;
-  }
-
-  /* HERO */
-  .hero {
-    position: relative;
-    height: 100vh;
-    min-height: 680px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .hero-bg-img {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-      radial-gradient(ellipse 65% 85% at 75% 52%, rgba(255,204,0,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 30% 40% at 88% 15%, rgba(255,204,0,0.04) 0%, transparent 50%),
-      radial-gradient(ellipse 20% 30% at 60% 90%, rgba(255,204,0,0.03) 0%, transparent 40%),
-      var(--black);
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.8) 40%, rgba(8,8,8,0.2) 65%, transparent 100%),
-      linear-gradient(180deg, rgba(8,8,8,0.5) 0%, transparent 25%, transparent 70%, rgba(8,8,8,0.98) 100%);
-    z-index: 1;
-  }
-
-  /* HERO DECORATION — CSS geometric right panel */
-  .hero-decor {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .hero-decor-q {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(280px, 35vw, 520px);
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,204,0,0.09);
-    user-select: none;
-    position: relative;
-    z-index: 2;
-    letter-spacing: -0.02em;
-  }
-  .hero-decor-ring {
-    position: absolute;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .hero-decor-ring-1 {
-    width: 680px; height: 680px;
-    border: 1px solid rgba(255,204,0,0.04);
-  }
-  .hero-decor-ring-2 {
-    width: 480px; height: 480px;
-    border: 1px solid rgba(255,204,0,0.06);
-  }
-  .hero-decor-ring-3 {
-    width: 300px; height: 300px;
-    border: 1px solid rgba(255,204,0,0.05);
-  }
-  /* Crosshair lines on Q */
-  .hero-decor-line-h {
-    position: absolute;
-    left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,204,0,0.06), transparent);
-    top: 50%;
-  }
-  .hero-decor-line-v {
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, rgba(255,204,0,0.06), transparent);
-    left: 50%;
-  }
-  /* Corner accent marks */
-  .hero-decor-corner {
-    position: absolute;
-    width: 20px; height: 20px;
-  }
-  .hero-decor-corner::before,
-  .hero-decor-corner::after {
-    content: '';
-    position: absolute;
-    background: rgba(255,204,0,0.25);
-  }
-  .hero-decor-corner::before { width: 100%; height: 1px; top: 0; left: 0; }
-  .hero-decor-corner::after  { width: 1px; height: 100%; top: 0; left: 0; }
-  .hero-decor-corner.tl { top: 60px; left: 40px; }
-  .hero-decor-corner.tr { top: 60px; right: 40px; transform: scaleX(-1); }
-  .hero-decor-corner.bl { bottom: 60px; left: 40px; transform: scaleY(-1); }
-  .hero-decor-corner.br { bottom: 60px; right: 40px; transform: scale(-1); }
-
-  @media (max-width: 768px) {
-    .hero-decor { width: 100%; opacity: 0.15; }
-    .hero-decor-q { font-size: 220px; }
-    .hero-decor-ring-1 { width: 340px; height: 340px; }
-    .hero-decor-ring-2 { width: 240px; height: 240px; }
-    .hero-decor-ring-3 { width: 150px; height: 150px; }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 60px;
-    max-width: 620px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .hero-eyebrow-line {
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-  }
-  .hero-eyebrow span {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 7vw, 100px);
-    line-height: 0.95;
-    letter-spacing: 0.03em;
-    color: var(--white);
-    margin-bottom: 24px;
-    text-align: left;
-  }
-  .hero-title em {
-    font-style: normal;
-    color: var(--gold);
-  }
-
-  .hero-subtitle {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: #bbb;
-    max-width: 380px;
-    margin-bottom: 40px;
-    letter-spacing: 0.02em;
-    text-align: left;
-  }
-
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: nowrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 16px 36px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #fff;
-    transform: translateX(-101%);
-    transition: transform 0.3s ease;
-    border-radius: 6px;
-  }
-  .btn-primary:hover::before { transform: translateX(0); }
-  .btn-primary span { position: relative; z-index: 1; }
-  .btn-primary svg { position: relative; z-index: 1; }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--white);
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 6px;
-    padding: 15px 36px;
-    text-decoration: none;
-    transition: all 0.25s;
-  }
-  .btn-secondary:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  /* Hero seals */
-  .hero-seals {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 16px;
-  }
-  .seal {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--white);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 16px 24px;
-    background: rgba(20,20,20,0.85);
-    backdrop-filter: blur(10px);
-    transition: all 0.25s;
-    white-space: nowrap;
-  }
-  .seal:hover {
-    border-color: rgba(255,204,0,0.4);
-    background: rgba(255,204,0,0.08);
-  }
-  .seal-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-  }
-  .seal-icon svg {
-    width: 24px;
-    height: 24px;
-    color: var(--gold);
-  }
-  .seal-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    line-height: 1.3;
-  }
-
-  /* MARQUEE */
-  .marquee-wrap {
-    background: var(--gold);
-    padding: 14px 0;
-    overflow: hidden;
-    position: relative;
-  }
-  .marquee-track {
-    display: flex;
-    gap: 0;
-    animation: marquee 25s linear infinite;
-    white-space: nowrap;
-    will-change: transform;
-  }
-  .marquee-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 24px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--black);
-    padding: 0 40px;
-    flex-shrink: 0;
-  }
-  .marquee-sep {
-    width: 4px; height: 4px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 50%;
-    display: inline-block;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SECTION BASE */
-  section { padding: 120px 60px; }
-
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-  }
-  .section-label span {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .section-label-line {
-    width: 32px; height: 1px;
-    background: var(--gold);
-    opacity: 0.5;
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 6vw, 88px);
-    line-height: 0.92;
-    letter-spacing: 0.03em;
-    color: var(--white);
-  }
-  .section-title em {
-    font-style: normal;
-    color: var(--gold);
-  }
-
-  /* CATEGORIAS */
-  .categories { background: var(--black-2); }
-  .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 2px;
-    margin-top: 64px;
-  }
-  .cat-card {
-    background: var(--black-3);
-    padding: 40px 24px 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s;
-    border-bottom: 2px solid transparent;
-    text-decoration: none;
-  }
-  .cat-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--gold-glow), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .cat-card:hover {
-    background: var(--black-4);
-    border-bottom-color: var(--gold);
-  }
-  .cat-card:hover::after { opacity: 1; }
-  .cat-icon {
-    font-size: 28px;
-    line-height: 1;
-  }
-  .cat-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--white);
-    transition: color 0.3s;
-  }
-  .cat-card:hover .cat-name { color: var(--gold); }
-  .cat-count {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    margin-top: auto;
-  }
-  .cat-arrow {
-    position: absolute;
-    right: 20px; bottom: 28px;
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.3s;
-    color: var(--gold);
-    font-size: 18px;
-  }
-  .cat-card:hover .cat-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* PROTOCOLO SECTION */
-  .protocolo {
-    background: var(--black);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    padding: 0;
-    min-height: 700px;
-  }
-  .protocolo-visual {
-    position: relative;
-    background:
-      radial-gradient(ellipse 80% 80% at 50% 60%, rgba(255,204,0,0.06) 0%, transparent 70%),
-      var(--black-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 80px;
-  }
-  .protocolo-visual::before {
-    content: '';
-    position: absolute;
-    width: 400px; height: 400px;
-    border: 1px solid rgba(255,204,0,0.08);
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    animation: rotateRing 20s linear infinite;
-  }
-  .protocolo-visual::after {
-    content: '';
-    position: absolute;
-    width: 280px; height: 280px;
-    border: 1px solid rgba(255,204,0,0.05);
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    animation: rotateRing 12s linear infinite reverse;
-  }
-  @keyframes rotateRing {
-    from { transform: translate(-50%,-50%) rotate(0deg); }
-    to { transform: translate(-50%,-50%) rotate(360deg); }
-  }
-
-  /* Big Q as design element */
-  .protocolo-q {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 320px;
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,204,0,0.12);
-    position: relative;
-    z-index: 1;
-    user-select: none;
-  }
-
-  /* Steps overlay */
-  .protocolo-steps {
-    position: absolute;
-    right: 60px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .step-dot {
-    width: 10px; height: 10px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    background: transparent;
-    transition: background 0.2s;
-    cursor: pointer;
-  }
-  .step-dot.active { background: var(--gold); box-shadow: 0 0 12px var(--gold); }
-
-  .protocolo-content {
-    padding: 100px 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .protocolo-content .section-label { margin-bottom: 40px; }
-  .protocolo-headline {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 5vw, 72px);
-    line-height: 0.92;
-    letter-spacing: 0.03em;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-  .protocolo-subline {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 5vw, 72px);
-    line-height: 0.92;
-    letter-spacing: 0.03em;
-    color: var(--gold);
-    margin-bottom: 40px;
-  }
-  .protocolo-text {
-    font-size: 14px;
-    line-height: 1.85;
-    color: var(--text-mid);
-    max-width: 380px;
-    margin-bottom: 48px;
-    letter-spacing: 0.02em;
-  }
-
-  .protocolo-features {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .feat-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-  }
-  .feat-num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-    width: 20px;
-    flex-shrink: 0;
-  }
-  .feat-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-mid);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding-bottom: 16px;
-    flex: 1;
-    transition: color 0.3s, border-color 0.3s;
-  }
-  .feat-item.active .feat-label {
-    color: var(--white);
-    border-bottom-color: rgba(255,204,0,0.2);
-  }
-
-  /* PRODUTOS */
-  .produtos { background: var(--black-2); }
-  .produtos-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 64px;
-  }
-  .produtos-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 2px;
-  }
-  .prod-card {
-    background: var(--black-3);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .prod-card:first-child {
-    grid-row: 1 / 3;
-  }
-  .prod-visual {
-    height: 300px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .prod-visual img {
-    max-width: 72%;
-    max-height: 78%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    transition: transform 0.4s ease;
-    filter: drop-shadow(0 8px 28px rgba(0,0,0,0.55));
-  }
-  .prod-card:hover .prod-visual img { transform: scale(1.05); }
-  .prod-card:first-child .prod-visual { height: 500px; }
-  .prod-card:first-child .prod-visual img { max-width: 68%; max-height: 80%; }
-
-  .prod-placeholder {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 80px;
-    color: rgba(255,204,0,0.06);
-    letter-spacing: 0.05em;
-    text-align: center;
-    user-select: none;
-    line-height: 1;
-  }
-  .prod-card:first-child .prod-placeholder { font-size: 140px; }
-
-  /* Gold glow effect on product hover */
-  .prod-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(255,204,0,0.06) 100%);
-    opacity: 0;
-    transition: opacity 0.4s;
-    z-index: 1;
-  }
-  .prod-card:hover::before { opacity: 1; }
-
-  .prod-badge {
-    position: absolute;
-    top: 20px; left: 20px;
-    z-index: 2;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    background: var(--gold);
-    color: var(--black);
-  }
-
-  .prod-info {
-    padding: 24px;
-    position: relative;
-    z-index: 2;
-  }
-  .prod-brand {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-  .prod-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .prod-card:first-child .prod-name { font-size: 28px; }
-  .prod-desc {
-    font-size: 12px;
-    color: var(--text-dim);
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  .prod-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .prod-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.05em;
-    color: var(--gold);
-  }
-  .prod-card:first-child .prod-price { font-size: 40px; }
-  .prod-buy {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .prod-buy:hover { background: #fff; }
-
-  /* PROVA SOCIAL */
-  .social { background: var(--black); }
-  .social-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 64px;
-  }
-  .review-card {
-    background: var(--black-2);
-    padding: 40px;
-    position: relative;
-    border-left: 2px solid transparent;
-    transition: border-color 0.3s;
-  }
-  .review-card:hover { border-left-color: var(--gold); }
-  .review-stars {
-    display: flex;
-    gap: 3px;
-    margin-bottom: 24px;
-  }
-  .star { color: var(--gold); font-size: 14px; }
-  .review-text {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--text-mid);
-    margin-bottom: 32px;
-    font-style: italic;
-    font-weight: 300;
-  }
-  .review-text::before {
-    content: '"';
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 60px;
-    color: rgba(255,204,0,0.1);
-    line-height: 0;
-    vertical-align: -24px;
-    margin-right: 6px;
-  }
-  .review-author {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .review-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--gray);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    color: var(--gold);
-  }
-  .review-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white);
-  }
-  .review-city {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-  }
-
-  /* STATS BAR */
-  .stats-bar {
-    background: var(--gold);
-    padding: 60px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-  }
-  .stat-item {
-    text-align: center;
-    padding: 20px;
-    border-right: 1px solid rgba(0,0,0,0.1);
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 72px;
-    letter-spacing: 0.02em;
-    color: var(--black);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(0,0,0,0.5);
-  }
-
-  /* SOBRE */
-  .sobre { background: var(--black-3); }
-  .sobre-content {
-    max-width: 700px;
-    margin: 40px 0 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .sobre-content p {
-    font-family: 'Barlow', sans-serif;
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--text-dim);
-  }
-  .sobre-valores {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-  .sobre-valor {
-    background: var(--black-4);
-    padding: 40px 32px;
-  }
-  .sobre-valor-icon {
-    font-size: 24px;
-    margin-bottom: 16px;
-    color: var(--gold);
-  }
-  .sobre-valor-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .sobre-valor-text {
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-
-  /* INSTAGRAM */
-  .instagram { background: var(--black-2); }
-  .instagram-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 64px;
-  }
-  .insta-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 2px;
-    margin-bottom: 48px;
-  }
-  .insta-tile {
-    aspect-ratio: 1;
-    background: var(--black-3);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-  }
-  .insta-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-  }
-  .insta-tile:hover .insta-img { transform: scale(1.05); }
-  .insta-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(8,8,8,0.55);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .insta-tile:hover .insta-overlay { opacity: 1; }
-  .insta-icon {
-    font-size: 28px;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-  .insta-type {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--white);
-  }
-  .instagram-cta { text-align: center; }
-
-  /* CONTATO */
-  .contato-section { background: var(--black-3); }
-  .contato-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    margin-top: 60px;
-    align-items: start;
-  }
-  .contato-info-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 0.08em;
-    color: var(--white);
-    margin-bottom: 28px;
-  }
-  .contato-detail {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: var(--text-dim);
-    font-family: 'Barlow', sans-serif;
-    font-size: 15px;
-    transition: color 0.2s;
-  }
-  .contato-detail:hover { color: var(--gold); }
-  .contato-detail-icon {
-    width: 44px; height: 44px;
-    background: var(--black-4);
-    border: 1px solid rgba(255,204,0,0.12);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-  .form-group { margin-bottom: 24px; }
-  .form-label {
-    display: block;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-  .form-input,
-  .form-textarea {
-    width: 100%;
-    background: var(--black-4);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-bottom: 2px solid rgba(255,204,0,0.3);
-    color: var(--white);
-    font-family: 'Barlow', sans-serif;
-    font-size: 15px;
-    padding: 14px 16px;
-    outline: none;
-    transition: border-color 0.25s;
-    appearance: none;
-    -webkit-appearance: none;
-  }
-  .form-input:focus,
-  .form-textarea:focus { border-bottom-color: var(--gold); }
-  .form-textarea { resize: vertical; min-height: 130px; }
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 40px 24px;
-    background: var(--black-4);
-    border: 1px solid rgba(255,204,0,0.2);
-  }
-  .form-success-icon { font-size: 40px; margin-bottom: 16px; }
-  .form-success-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 0.05em;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-  .form-success-text {
-    font-family: 'Barlow', sans-serif;
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-  @media (max-width: 1100px) {
-    .contato-grid { grid-template-columns: 1fr; gap: 48px; }
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--black-2);
-    border-top: 1px solid rgba(255,204,0,0.08);
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 80px;
-    padding: 80px 60px;
-  }
-  .footer-brand-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 40px;
-    letter-spacing: 0.15em;
-    margin-bottom: 16px;
-  }
-  .footer-brand-name span { color: var(--gold); }
-  .footer-tagline {
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.7;
-    margin-bottom: 32px;
-    max-width: 260px;
-  }
-  .footer-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .footer-contact a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-contact a:hover { color: var(--gold); }
-  .contact-icon { color: var(--gold); font-size: 14px; }
-  .footer-col-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 28px;
-  }
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    list-style: none;
-  }
-  .footer-links a {
-    font-size: 13px;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-payments {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  .pay-tag {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    border: 1px solid var(--gray);
-    padding: 6px 10px;
-  }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.04);
-    padding: 24px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .footer-copy {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.08em;
-  }
-  .footer-copy span { color: var(--gold); }
-  .footer-legal {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
-  .footer-legal a {
-    font-size: 11px;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    transition: color 0.2s;
-  }
-  .footer-legal a:hover { color: var(--gold); }
-
-  /* WHATSAPP FLOAT */
-  .whatsapp-float {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 200;
-    width: 56px; height: 56px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 24px rgba(37,211,102,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none;
-  }
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(37,211,102,0.6);
-  }
-  .whatsapp-float svg { width: 28px; height: 28px; }
-
-  /* ENTRY ANIMATIONS */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Staggered delays */
-  .delay-1 { transition-delay: 0.1s; }
-  .delay-2 { transition-delay: 0.2s; }
-  .delay-3 { transition-delay: 0.3s; }
-  .delay-4 { transition-delay: 0.4s; }
-  .delay-5 { transition-delay: 0.5s; }
-
-  /* REDUCED MOTION */
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track { animation: none; }
-    .protocolo-visual::before,
-    .protocolo-visual::after { animation: none; }
-    .fade-up {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-    .btn-primary::before { transition: none; }
-  }
-
-  /* RESPONSIVE — TABLET 1100px */
-  @media (max-width: 1100px) {
-    nav { padding: 20px 30px; }
-    .nav-links { gap: 20px; }
-    section { padding: 80px 30px; }
-    .hero { min-height: 600px; }
-    .hero-content { padding: 0 30px; }
-    .hero-seals {
-      flex-direction: column;
-      align-items: center;
-      bottom: 24px;
-      padding: 0 30px;
-      gap: 8px;
-    }
-    .seal { justify-content: flex-start; width: 100%; max-width: 300px; }
-    .categories-grid { grid-template-columns: repeat(3, 1fr); }
-    .protocolo { grid-template-columns: 1fr; }
-    .protocolo-visual { display: none; }
-    .protocolo-content { padding: 80px 30px; }
-    .produtos-grid { grid-template-columns: 1fr 1fr; }
-    .prod-card:first-child { grid-row: auto; }
-    .social-grid { grid-template-columns: 1fr 1fr; }
-    .sobre-valores { grid-template-columns: 1fr 1fr; }
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    .insta-grid { grid-template-columns: repeat(3, 1fr); }
-    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 30px; }
-    .footer-bottom { padding: 20px 30px; flex-direction: column; gap: 12px; text-align: center; }
-    .footer-legal { flex-wrap: wrap; justify-content: center; }
-  }
-
-  /* RESPONSIVE — MOBILE 768px */
-  @media (max-width: 768px) {
-    /* Nav */
-    .nav-links, .nav-cta { display: none; }
-    .nav-hamburger { display: flex; }
-    nav { padding: 16px 20px; }
-
-    /* Section base */
-    section { padding: 56px 20px; }
-
-    /* Hero */
-    .hero { min-height: min(100svh, 700px); }
-    .hero-content { padding: 0 20px; max-width: 100%; }
-    .hero-subtitle { font-size: 14px; max-width: 100%; margin-bottom: 32px; }
-    .hero-decor { opacity: 0.12; }
-
-    /* Hero seals — stacked coluna, centralizados */
-    .hero-seals {
-      flex-direction: column;
-      align-items: center;
-      bottom: 16px;
-      padding: 0 20px;
-      gap: 8px;
-    }
-    .seal {
-      width: 100%;
-      max-width: 260px;
-      justify-content: flex-start;
-      padding: 10px 16px;
-      font-size: 11px;
-    }
-    .seal-icon { width: 28px; height: 28px; }
-    .seal-icon svg { width: 18px; height: 18px; }
-
-    .hero-actions { gap: 12px; }
-
-    /* Títulos de seção */
-    .section-title { font-size: clamp(38px, 9vw, 64px); }
-
-    /* Categorias */
-    .categories-grid { grid-template-columns: repeat(2, 1fr); }
-    .cat-card { padding: 28px 20px 24px; }
-
-    /* Protocolo */
-    .protocolo-content { padding: 56px 20px; }
-    .protocolo-headline,
-    .protocolo-subline { font-size: clamp(36px, 9vw, 56px); }
-    .protocolo-text { max-width: 100%; }
-
-    /* Stats */
-    .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 40px 20px; }
-    .stat-num { font-size: 48px; }
-    .stat-item { padding: 16px 12px; }
-    .stat-item:nth-child(2) { border-right: none; }
-
-    /* Produtos */
-    .produtos-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .produtos-header .btn-secondary { align-self: flex-start !important; }
-    .instagram-header .btn-primary { align-self: flex-start !important; }
-    .produtos-grid { grid-template-columns: 1fr; }
-    .prod-card:first-child { grid-row: auto; }
-    .prod-card:first-child .prod-visual { height: 260px; }
-    .prod-visual { height: 200px; }
-    /* Touch target mínimo 44px */
-    .prod-buy { min-height: 44px; padding: 12px 20px; font-size: 12px; }
-
-    /* Avaliações */
-    .social-grid { grid-template-columns: 1fr; }
-    .review-card { padding: 28px 20px; }
-
-    /* Sobre */
-    .sobre-valores { grid-template-columns: 1fr; }
-
-    /* Instagram */
-    .instagram-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .insta-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* Footer */
-    .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
-    .footer-tagline { max-width: 100%; }
-    .footer-bottom { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
-    .footer-legal { flex-wrap: wrap; justify-content: center; gap: 16px; }
-
-    /* WhatsApp float */
-    .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
-    .whatsapp-float svg { width: 24px; height: 24px; }
-  }
-
-  /* RESPONSIVE — SMALL MOBILE 540px */
-  @media (max-width: 540px) {
-    .hero-actions { gap: 10px; }
-    .hero-actions .btn-primary,
-    .hero-actions .btn-secondary { justify-content: center; padding: 13px 16px; font-size: 11px; }
-  }
-
-  /* RESPONSIVE — SMALL MOBILE 480px */
-  @media (max-width: 480px) {
-    section { padding: 48px 16px; }
-    nav { padding: 16px; }
-
-    /* Esconde seals pra não empilhar 3 itens */
-    .hero-seals { display: none; }
-    .hero-content { padding: 0 16px; }
-
-    /* Categorias 2 col menor */
-    .categories-grid { grid-template-columns: 1fr 1fr; }
-    .cat-card { padding: 20px 14px 18px; gap: 10px; }
-    .cat-icon { font-size: 22px; }
-    .cat-name { font-size: 13px; }
-    .cat-count { font-size: 10px; }
-
-    /* Stats menores */
-    .stats-bar { padding: 28px 16px; gap: 0; }
-    .stat-num { font-size: 40px; }
-    .stat-label { font-size: 10px; letter-spacing: 0.15em; }
-
-    /* Instagram 3 col (tiles menores, mas reconhecíveis) */
-    .insta-grid { grid-template-columns: repeat(3, 1fr); }
-
-    /* Review cards */
-    .review-card { padding: 20px 16px; }
-    .review-text { font-size: 14px; }
-
-    /* Footer */
-    .footer-top { padding: 40px 16px; }
-    .footer-bottom { padding: 16px; }
-    .footer-brand-name { font-size: 32px; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #ffcc00;
+  --gold-dim: #c9a000;
+  --gold-glow: rgba(255,204,0,0.14);
+  --black: #0a0a0a;
+  --black-2: #121212;
+  --black-3: #181818;
+  --black-4: #222222;
+  --gray: #2c2c2c;
+  --text-dim: #999;
+  --text-mid: #bbb;
+  --white: #f2f2f0;
+}
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+@media (hover: none) { body { cursor: auto; } .cursor, .cursor-ring { display: none; } }
+
+/* SKIP TO CONTENT */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 16px;
+  z-index: 99999;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* FOCUS VISIBLE */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+a:focus-visible, button:focus-visible { outline-offset: 4px; }
+
+/* PROGRESS BAR */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: var(--gold);
+  z-index: 10000;
+  pointer-events: none;
+  transition: width 0.06s linear;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  position: fixed; width: 32px; height: 32px;
+  border: 1px solid rgba(255,204,0,0.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all 0.18s ease;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9997; opacity: 0.4;
+}
+
+/* MOBILE NAV OVERLAY */
+.nav-mobile-overlay {
+  display: none; position: fixed; inset: 0; z-index: 600;
+  background: var(--black);
+  flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+}
+.nav-mobile-overlay.open { display: flex; }
+.nav-close {
+  position: absolute; top: 28px; right: 28px;
+  background: none; border: none; color: var(--white);
+  font-size: 28px; cursor: pointer; line-height: 1; transition: color 0.2s;
+}
+.nav-close:hover { color: var(--gold); }
+.nav-mobile-links {
+  list-style: none; text-align: center;
+  display: flex; flex-direction: column; gap: 4px; margin-bottom: 40px;
+}
+.nav-mobile-links a {
+  font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+  letter-spacing: 0.1em; color: var(--text-dim);
+  text-decoration: none; transition: color 0.2s;
+  display: block; padding: 4px 0;
+}
+.nav-mobile-links a:hover { color: var(--gold); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 60px;
+  background: linear-gradient(180deg, rgba(10,10,10,0.96) 0%, transparent 100%);
+  backdrop-filter: blur(2px);
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+nav.scrolled { background: rgba(10,10,10,0.98); backdrop-filter: blur(14px); }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  letter-spacing: 0.15em; color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0); transition: transform 0.25s ease;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--black); background: var(--gold);
+  padding: 10px 24px; border-radius: 6px; text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--white); transform: translateY(-1px); }
+.nav-cta:active { transform: scale(0.97); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 8px;
+}
+.nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex; align-items: center; overflow: hidden;
+}
+.hero-bg-img {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 65% 85% at 75% 52%, rgba(255,204,0,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 88% 15%, rgba(255,204,0,0.04) 0%, transparent 50%),
+    var(--black);
+}
+.hero-photo-panel {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 58%; z-index: 0; overflow: hidden;
+}
+.hero-photo-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 20%; display: block;
+}
+.hero-photo-panel::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, transparent 18%, transparent 78%, rgba(10,10,10,0.55) 100%);
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(10,10,10,0.99) 0%, rgba(10,10,10,0.96) 30%, rgba(10,10,10,0.62) 52%, rgba(10,10,10,0.18) 72%, transparent 100%),
+    linear-gradient(180deg, rgba(10,10,10,0.5) 0%, transparent 25%, transparent 70%, rgba(10,10,10,0.98) 100%);
+}
+.hero-decor {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+  z-index: 1; display: flex; align-items: center; justify-content: center;
+  pointer-events: none; overflow: hidden; opacity: 0.22;
+}
+.hero-decor-q {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(280px, 35vw, 520px); line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,204,0,0.12);
+  user-select: none; position: relative; z-index: 2; letter-spacing: -0.02em;
+}
+.hero-decor-ring { position: absolute; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.hero-decor-ring-1 { width: 680px; height: 680px; border: 1px solid rgba(255,204,0,0.06); }
+.hero-decor-ring-2 { width: 480px; height: 480px; border: 1px solid rgba(255,204,0,0.08); }
+.hero-decor-ring-3 { width: 300px; height: 300px; border: 1px solid rgba(255,204,0,0.05); }
+
+@media (max-width: 1100px) { .hero-photo-panel { display: none; } .hero-decor { width: 100%; opacity: 0.14; } }
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 60px; max-width: 640px;
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+.hero-eyebrow span {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold);
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 7.5vw, 108px);
+  line-height: 0.92; letter-spacing: 0.02em;
+  color: var(--white); margin-bottom: 28px;
+  text-wrap: pretty;
+}
+.hero-title em { font-style: normal; color: var(--gold); }
+.hero-subtitle {
+  font-size: 15px; font-weight: 300; line-height: 1.8;
+  color: #aaa; max-width: 380px; margin-bottom: 44px;
+  letter-spacing: 0.02em; text-wrap: pretty;
+}
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; }
+
+/* BUTTONS */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--black); background: var(--gold);
+  padding: 16px 36px; border-radius: 6px; text-decoration: none;
+  transition: background 0.25s, transform 0.15s; position: relative; overflow: hidden;
+  border: none; cursor: pointer;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0; background: var(--white);
+  transform: translateX(-101%); transition: transform 0.3s ease;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.97) translateY(0); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--white); background: transparent;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 6px;
+  padding: 15px 36px; text-decoration: none; transition: all 0.22s; cursor: pointer;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+.btn-secondary:active { transform: scale(0.97); }
+
+/* Hero seals */
+.hero-seals {
+  position: absolute; bottom: 40px; left: 0; right: 0; z-index: 2;
+  display: flex; flex-direction: row; justify-content: center; gap: 12px;
+}
+.seal {
+  display: flex; align-items: center; gap: 14px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+  padding: 14px 22px; background: rgba(18,18,18,0.88); backdrop-filter: blur(12px);
+  transition: all 0.25s; white-space: nowrap;
+}
+.seal:hover { border-color: rgba(255,204,0,0.4); background: rgba(255,204,0,0.06); }
+.seal-icon { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex-shrink: 0; color: var(--gold); }
+.seal-icon svg { width: 20px; height: 20px; }
+.seal-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.3; }
+
+/* MARQUEE */
+.marquee-wrap {
+  background: var(--gold); padding: 14px 0;
+  overflow: hidden; position: relative;
+}
+.marquee-wrap::before, .marquee-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 1; pointer-events: none;
+}
+.marquee-wrap::before { left: 0; background: linear-gradient(90deg, var(--gold) 0%, transparent 100%); }
+.marquee-wrap::after { right: 0; background: linear-gradient(-90deg, var(--gold) 0%, transparent 100%); }
+.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+.marquee-track {
+  display: flex; gap: 0; animation: marquee 28s linear infinite;
+  white-space: nowrap; will-change: transform;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 24px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--black); padding: 0 40px; flex-shrink: 0;
+}
+.marquee-sep { width: 4px; height: 4px; background: rgba(0,0,0,0.3); border-radius: 50%; display: inline-block; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTION BASE */
+section { padding: 120px 60px; }
+.section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.section-label span {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);
+}
+.section-label-line { width: 32px; height: 1px; background: var(--gold); opacity: 0.5; }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.92; letter-spacing: 0.03em; color: var(--white);
+}
+.section-title em { font-style: normal; color: var(--gold); }
+
+/* ===== CATEGORIAS — asymmetric featured grid ===== */
+.categories { background: var(--black-2); }
+.categories-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  margin-top: 64px;
+  min-height: 400px;
+}
+.cat-card {
+  background: var(--black-3);
+  padding: 36px 28px 28px;
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 16px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  text-decoration: none;
+}
+.cat-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--gold-glow), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.cat-card:hover { background: var(--black-4); border-bottom-color: var(--gold); }
+.cat-card:hover::after { opacity: 1; }
+.cat-card:active { transform: scale(0.995); }
+
+/* Featured card — spans 2 rows */
+.cat-card.cat-featured {
+  grid-row: 1 / 3;
+  padding: 48px 40px 40px;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 70%, rgba(255,204,0,0.05) 0%, transparent 60%),
+    var(--black-3);
+}
+.cat-card.cat-featured .cat-icon svg { width: 36px; height: 36px; }
+.cat-card.cat-featured .cat-name { font-size: 22px; }
+.cat-card.cat-featured .cat-desc {
+  display: block;
+  font-size: 13px; color: var(--text-dim); line-height: 1.7;
+  margin-top: auto; max-width: 200px; text-wrap: pretty;
+}
+.cat-card.cat-featured::before {
+  content: attr(data-label);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px; line-height: 1;
+  color: rgba(255,204,0,0.04);
+  position: absolute; bottom: 20px; right: 20px;
+  pointer-events: none; user-select: none; letter-spacing: 0.05em;
+}
+
+.cat-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--gold); }
+.cat-icon svg { width: 24px; height: 24px; stroke: var(--gold); transition: stroke 0.3s; }
+.cat-name {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 16px;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--white); transition: color 0.3s;
+}
+.cat-card:hover .cat-name { color: var(--gold); }
+.cat-count { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; margin-top: auto; }
+.cat-desc { display: none; }
+.cat-arrow {
+  position: absolute; right: 20px; bottom: 28px;
+  opacity: 0; transform: translateX(-8px); transition: all 0.3s;
+  color: var(--gold); font-size: 18px;
+}
+.cat-card:hover .cat-arrow { opacity: 1; transform: translateX(0); }
+
+/* PROTOCOLO */
+.protocolo {
+  background: var(--black);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; padding: 0; min-height: 700px;
+}
+.protocolo-visual {
+  position: relative;
+  background: radial-gradient(ellipse 80% 80% at 50% 60%, rgba(255,204,0,0.06) 0%, transparent 70%), var(--black-2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 80px;
+}
+.protocolo-visual::before {
+  content: ''; position: absolute;
+  width: 400px; height: 400px; border: 1px solid rgba(255,204,0,0.08);
+  border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: rotateRing 20s linear infinite;
+}
+.protocolo-visual::after {
+  content: ''; position: absolute;
+  width: 280px; height: 280px; border: 1px solid rgba(255,204,0,0.05);
+  border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: rotateRing 12s linear infinite reverse;
+}
+@keyframes rotateRing {
+  from { transform: translate(-50%,-50%) rotate(0deg); }
+  to   { transform: translate(-50%,-50%) rotate(360deg); }
+}
+.protocolo-q {
+  font-family: 'Bebas Neue', sans-serif; font-size: 320px; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,204,0,0.1);
+  position: relative; z-index: 1; user-select: none;
+}
+.protocolo-steps {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  z-index: 2; display: flex; flex-direction: column; gap: 20px;
+}
+.step-dot {
+  width: 10px; height: 10px; border: 1px solid var(--gold);
+  border-radius: 50%; background: transparent;
+  transition: background 0.2s; cursor: pointer;
+}
+.step-dot.active { background: var(--gold); box-shadow: 0 0 12px var(--gold); }
+.protocolo-content { padding: 100px 80px; display: flex; flex-direction: column; justify-content: center; }
+.protocolo-content .section-label { margin-bottom: 40px; }
+.protocolo-headline {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 5vw, 72px);
+  line-height: 0.92; letter-spacing: 0.03em; color: var(--white); margin-bottom: 16px;
+}
+.protocolo-subline {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 5vw, 72px);
+  line-height: 0.92; letter-spacing: 0.03em; color: var(--gold); margin-bottom: 40px;
+}
+.protocolo-text {
+  font-size: 14px; line-height: 1.88; color: var(--text-dim);
+  max-width: 380px; margin-bottom: 48px; letter-spacing: 0.02em; text-wrap: pretty;
+}
+.protocolo-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+.feat-item { display: flex; align-items: center; gap: 16px; cursor: pointer; }
+.feat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--gold); width: 20px; flex-shrink: 0; }
+.feat-label {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
+  font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-dim); border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 16px; flex: 1; transition: color 0.3s, border-color 0.3s;
+}
+.feat-item.active .feat-label { color: var(--white); border-bottom-color: rgba(255,204,0,0.2); }
+
+/* ===== STATS BAR — editorial dark redesign, no full-gold bg ===== */
+.stats-bar {
+  background: var(--black-2);
+  border-top: 1px solid rgba(255,204,0,0.08);
+  border-bottom: 1px solid rgba(255,204,0,0.08);
+  padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 60px 48px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative; overflow: hidden;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.6s ease;
+}
+.stat-item.counted::before { transform: scaleX(1); }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 5vw, 80px);
+  letter-spacing: 0.02em; color: var(--gold);
+  line-height: 1; font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-dim);
+}
+.stat-context {
+  font-family: 'Barlow', sans-serif; font-size: 12px;
+  color: rgba(153,153,153,0.6); line-height: 1.5; text-wrap: pretty;
+  max-width: 140px; margin-top: 4px;
+}
+
+/* ===== PRODUTOS — spotlight cursor effect ===== */
+.produtos { background: var(--black-3); }
+.produtos-header {
+  display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px;
+}
+.produtos-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+.prod-card {
+  background: var(--black-2);
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.prod-card:first-child { grid-row: 1 / 3; }
+.prod-spotlight {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(255,204,0,0.07) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.prod-card:hover .prod-spotlight { opacity: 1; }
+.prod-visual {
+  height: 300px; background: #f8f8f8;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.prod-visual img {
+  max-width: 72%; max-height: 78%; width: auto; height: auto;
+  object-fit: contain; transition: transform 0.42s ease;
+  filter: drop-shadow(0 8px 28px rgba(0,0,0,0.45));
+}
+.prod-card:hover .prod-visual img { transform: scale(1.06); }
+.prod-card:first-child .prod-visual { height: 500px; }
+.prod-card:first-child .prod-visual img { max-width: 68%; max-height: 80%; }
+.prod-badge {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 6px 12px; background: var(--gold); color: var(--black);
+}
+.prod-info { padding: 28px; position: relative; z-index: 1; }
+.prod-brand {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.prod-name {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 20px;
+  font-weight: 700; letter-spacing: 0.05em; color: var(--white); margin-bottom: 4px;
+}
+.prod-card:first-child .prod-name { font-size: 28px; }
+.prod-desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
+.prod-footer { display: flex; align-items: center; justify-content: space-between; }
+.prod-price {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  letter-spacing: 0.05em; color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.prod-card:first-child .prod-price { font-size: 40px; }
+.prod-buy {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--black); background: var(--gold); padding: 10px 20px;
+  border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.prod-buy:hover { background: var(--white); }
+.prod-buy:active { transform: scale(0.97); }
+
+/* AVALIAÇÕES */
+.social { background: var(--black); }
+.social-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px;
+}
+.review-card {
+  background: var(--black-2); padding: 44px 40px 40px;
+  position: relative; overflow: hidden;
+  border-top: 1px solid rgba(255,204,0,0.1);
+  transition: background 0.3s;
+}
+.review-card::before {
+  content: '\201C'; font-family: 'Bebas Neue', sans-serif;
+  font-size: 140px; line-height: 1; color: rgba(255,204,0,0.05);
+  position: absolute; top: -4px; left: 20px;
+  pointer-events: none; user-select: none;
+}
+.review-card:hover { background: var(--black-3); }
+.review-stars { display: flex; gap: 3px; margin-bottom: 24px; }
+.star { color: var(--gold); font-size: 12px; letter-spacing: 2px; }
+.review-text {
+  font-size: 15px; line-height: 1.82; color: var(--text-mid); margin-bottom: 32px;
+  font-style: italic; font-weight: 300; text-wrap: pretty; position: relative; z-index: 1;
+}
+.review-author { display: flex; align-items: center; gap: 14px; }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: var(--gray); display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--gold); flex-shrink: 0;
+}
+.review-name {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white);
+}
+.review-city { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; }
+
+/* SOBRE */
+.sobre { background: var(--black-3); }
+.sobre-content {
+  max-width: 680px; margin: 40px 0 60px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.sobre-content p {
+  font-size: 15px; line-height: 1.85; color: var(--text-dim); text-wrap: pretty;
+}
+.sobre-valores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.sobre-valor { background: var(--black-4); padding: 40px 32px; transition: background 0.3s; }
+.sobre-valor:hover { background: #252525; }
+.sobre-valor-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1;
+  letter-spacing: 0.02em; color: rgba(255,204,0,0.18); margin-bottom: 16px;
+  transition: color 0.35s;
+}
+.sobre-valor:hover .sobre-valor-num { color: rgba(255,204,0,0.42); }
+.sobre-valor-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+  letter-spacing: 0.05em; color: var(--white); margin-bottom: 8px;
+}
+.sobre-valor-text { font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+
+/* ===== INSTAGRAM — featured grid: first tile spans 2 rows ===== */
+.instagram { background: var(--black-2); }
+.instagram-header {
+  display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px;
+}
+.insta-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+.insta-tile {
+  background: var(--black-3); position: relative;
+  overflow: hidden; cursor: pointer; display: block; text-decoration: none;
+}
+.insta-tile { aspect-ratio: 1; }
+.insta-tile.insta-featured { grid-row: 1 / 3; aspect-ratio: unset; min-height: 400px; }
+.insta-img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.42s ease;
+}
+.insta-tile:hover .insta-img { transform: scale(1.06); }
+.insta-overlay {
+  position: absolute; inset: 0; background: rgba(10,10,10,0.5);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.insta-tile:hover .insta-overlay { opacity: 1; }
+.insta-icon { width: 32px; height: 32px; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; }
+.insta-icon svg { width: 26px; height: 26px; stroke: currentColor; }
+.insta-type {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white);
+}
+.instagram-cta { text-align: center; }
+
+/* CONTATO */
+.contato-section { background: var(--black-3); }
+.contato-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; margin-top: 60px; align-items: start;
+}
+.contato-info-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+  letter-spacing: 0.08em; color: var(--white); margin-bottom: 28px;
+}
+.contato-detail {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+  text-decoration: none; color: var(--text-dim); font-size: 15px; transition: color 0.2s;
+}
+.contato-detail:hover { color: var(--gold); }
+.contato-detail-icon {
+  width: 44px; height: 44px; background: var(--black-4);
+  border: 1px solid rgba(255,204,0,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--gold);
+}
+.contato-detail-icon svg { width: 20px; height: 20px; stroke: currentColor; }
+
+/* FORM + VALIDATION */
+.form-group { margin-bottom: 24px; position: relative; }
+.form-label {
+  display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+.form-input, .form-textarea {
+  width: 100%; background: var(--black-4);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 2px solid rgba(255,204,0,0.3);
+  color: var(--white); font-family: 'Barlow', sans-serif; font-size: 15px;
+  padding: 14px 16px; outline: none; transition: border-color 0.25s;
+  appearance: none; -webkit-appearance: none;
+}
+.form-input:focus, .form-textarea:focus { border-bottom-color: var(--gold); }
+.form-input.invalid, .form-textarea.invalid { border-bottom-color: #e05252; }
+.form-error {
+  display: none; font-size: 11px; color: #e05252;
+  font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.1em;
+  margin-top: 6px; position: absolute; bottom: -20px; left: 0;
+}
+.form-error.visible { display: block; }
+.form-textarea { resize: vertical; min-height: 130px; }
+.form-success {
+  display: none; text-align: center; padding: 40px 24px;
+  background: var(--black-4); border: 1px solid rgba(255,204,0,0.2);
+}
+.form-success-check {
+  width: 48px; height: 48px; border: 2px solid var(--gold); border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--gold); margin-bottom: 20px;
+}
+.form-success-check svg { width: 22px; height: 22px; stroke: currentColor; }
+.form-success-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+  letter-spacing: 0.05em; color: var(--gold); margin-bottom: 8px;
+}
+.form-success-text { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+/* FOOTER */
+footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08); }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px; padding: 80px 60px;
+}
+.footer-brand-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 40px;
+  letter-spacing: 0.15em; margin-bottom: 16px;
+}
+.footer-brand-name span { color: var(--gold); }
+.footer-tagline {
+  font-size: 13px; color: var(--text-dim); line-height: 1.75;
+  margin-bottom: 32px; max-width: 260px; text-wrap: pretty;
+}
+.footer-contact { display: flex; flex-direction: column; gap: 10px; }
+.footer-contact a {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.2s;
+}
+.footer-contact a:hover { color: var(--gold); }
+.footer-contact-span {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid);
+}
+.contact-icon { color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; display: inline-flex; align-items: center; }
+.contact-icon svg { width: 16px; height: 16px; stroke: currentColor; }
+.footer-col-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 28px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; }
+.footer-links a { font-size: 13px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-payments { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.pay-tag {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); border: 1px solid var(--gray); padding: 6px 10px;
+}
+.footer-deliver { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+.footer-deliver-item {
+  font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-deliver-item::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0; opacity: 0.6;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; }
+.footer-copy span { color: var(--gold); }
+.footer-legal { display: flex; gap: 24px; list-style: none; }
+.footer-legal a { font-size: 11px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--gold); }
+
+/* WHATSAPP FLOAT */
+.whatsapp-float {
+  position: fixed; bottom: 32px; right: 32px; z-index: 200;
+  width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+  transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+}
+.whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.6); }
+.whatsapp-float:active { transform: scale(0.97); }
+.whatsapp-float svg { width: 28px; height: 28px; }
+
+/* BACK TO TOP */
+.back-to-top {
+  position: fixed; bottom: 100px; right: 32px; z-index: 198;
+  width: 44px; height: 44px; background: rgba(18,18,18,0.88);
+  border: 1px solid rgba(255,204,0,0.2); border-radius: 50%;
+  color: var(--gold); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(12px); transition: all 0.35s ease;
+  backdrop-filter: blur(8px);
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { background: var(--gold); color: var(--black); border-color: var(--gold); transform: translateY(-2px); }
+.back-to-top:active { transform: scale(0.95); }
+.back-to-top svg { width: 18px; height: 18px; stroke: currentColor; }
+
+/* ENTRY ANIMATIONS */
+.fade-up {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.72s ease, transform 0.72s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.40s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .protocolo-visual::before, .protocolo-visual::after { animation: none; }
+  .fade-up { opacity: 1; transform: none; transition: none; }
+  .btn-primary::before { transition: none; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  nav { padding: 20px 30px; }
+  .nav-links { gap: 20px; }
+  section { padding: 80px 30px; }
+  .hero-content { padding: 0 30px; }
+  .hero-seals { flex-direction: column; align-items: center; bottom: 24px; padding: 0 30px; gap: 8px; }
+  .seal { justify-content: flex-start; width: 100%; max-width: 300px; }
+  .categories-grid { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto; }
+  .cat-card.cat-featured { grid-row: auto; grid-column: 1 / 4; padding: 36px 28px; }
+  .cat-card.cat-featured .cat-desc { display: block; max-width: 100%; }
+  .protocolo { grid-template-columns: 1fr; }
+  .protocolo-visual { display: none; }
+  .protocolo-content { padding: 80px 30px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.05); }
+  .stat-item:nth-child(4) { border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
+  .produtos-grid { grid-template-columns: 1fr 1fr; }
+  .prod-card:first-child { grid-row: auto; }
+  .social-grid { grid-template-columns: 1fr 1fr; }
+  .sobre-valores { grid-template-columns: 1fr 1fr; }
+  .insta-grid { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto; }
+  .insta-tile.insta-featured { grid-row: auto; min-height: auto; aspect-ratio: 1; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 30px; }
+  .footer-bottom { padding: 20px 30px; flex-direction: column; gap: 12px; text-align: center; }
+  .contato-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  nav { padding: 16px 20px; }
+  section { padding: 56px 20px; }
+  .hero { min-height: min(100svh, 700px); }
+  .hero-content { padding: 0 20px; max-width: 100%; }
+  .hero-subtitle { font-size: 14px; max-width: 100%; margin-bottom: 32px; }
+  .hero-seals { display: none; }
+  .hero-actions { gap: 12px; }
+  .section-title { font-size: clamp(38px, 9vw, 64px); }
+  .categories-grid { grid-template-columns: 1fr 1fr; }
+  .cat-card.cat-featured { grid-column: 1 / 3; }
+  .stats-bar { grid-template-columns: 1fr 1fr; padding: 0; }
+  .stat-item { padding: 32px 24px; }
+  .stat-num { font-size: 48px; }
+  .produtos-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .produtos-grid { grid-template-columns: 1fr; }
+  .prod-card:first-child .prod-visual { height: 260px; }
+  .prod-visual { height: 220px; }
+  .social-grid { grid-template-columns: 1fr; }
+  .sobre-valores { grid-template-columns: 1fr; }
+  .instagram-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .insta-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .insta-tile.insta-featured { grid-row: auto; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
+  .footer-tagline { max-width: 100%; }
+  .footer-bottom { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .whatsapp-float { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+  .back-to-top { bottom: 80px; right: 16px; }
+  .review-card { padding: 32px 24px; }
+  .protocolo-content { padding: 56px 20px; }
+}
+
+@media (max-width: 480px) {
+  section { padding: 48px 16px; }
+  nav { padding: 16px; }
+  .categories-grid { grid-template-columns: 1fr 1fr; }
+  .cat-card.cat-featured { grid-column: 1 / 3; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .stat-num { font-size: 40px; }
+  .stat-item { padding: 24px 16px; }
+  .stat-label { font-size: 10px; }
+  .insta-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .footer-top { padding: 40px 16px; }
+  .footer-bottom { padding: 16px; }
+}
 </style>
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Ir para o conteúdo</a>
+<div id="progress-bar"></div>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- MOBILE NAV OVERLAY -->
-<div class="nav-mobile-overlay" id="navOverlay">
+<div class="nav-mobile-overlay" id="navOverlay" role="dialog" aria-label="Menu de navegação">
   <button class="nav-close" id="navClose" aria-label="Fechar menu">✕</button>
   <ul class="nav-mobile-links">
     <li><a href="#">Home</a></li>
     <li><a href="#produtos">Produtos</a></li>
+    <li><a href="catalogo.html">Catálogo</a></li>
     <li><a href="#protocolo">Protocolo</a></li>
-    <li><a href="#kits">Kits</a></li>
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5599992007182" class="btn-primary">
     <span>Fazer Pedido</span>
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 </div>
 
 <!-- NAV -->
-<nav id="mainNav">
-  <a href="#" class="nav-logo">QUASAR<span>.</span></a>
-  <ul class="nav-links">
+<nav id="mainNav" role="navigation" aria-label="Navegação principal">
+  <a href="#" class="nav-logo" aria-label="Quasar Barber — página inicial">QUASAR<span>.</span></a>
+  <ul class="nav-links" role="list">
     <li><a href="#">Home</a></li>
     <li><a href="#produtos">Produtos</a></li>
+    <li><a href="catalogo.html">Catálogo</a></li>
     <li><a href="#protocolo">Protocolo</a></li>
-    <li><a href="#kits">Kits</a></li>
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5599992007182" class="nav-cta">Fazer Pedido</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-img"></div>
-  <div class="hero-bg"></div>
+<main id="main-content">
+<section class="hero" aria-label="Apresentação Quasar Barber">
+  <div class="hero-bg-img" aria-hidden="true"></div>
+  <div class="hero-photo-panel" aria-hidden="true">
+    <img src="insta-shampoo%20black%20whisky.png" alt="" class="hero-photo-img" loading="eager"
+         onerror="this.parentElement.style.display='none'">
+  </div>
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-decor" aria-hidden="true">
     <div class="hero-decor-ring hero-decor-ring-1"></div>
     <div class="hero-decor-ring hero-decor-ring-2"></div>
     <div class="hero-decor-ring hero-decor-ring-3"></div>
-    <div class="hero-decor-line-h"></div>
-    <div class="hero-decor-line-v"></div>
     <div class="hero-decor-q">Q</div>
-    <div class="hero-decor-corner tl"></div>
-    <div class="hero-decor-corner tr"></div>
-    <div class="hero-decor-corner bl"></div>
-    <div class="hero-decor-corner br"></div>
   </div>
 
   <div class="hero-content">
@@ -1618,7 +1001,7 @@
     </div>
     <h1 class="hero-title fade-up delay-1">
       Cuidado Masculino<br>
-       de verdade, montado <br>
+      de verdade, montado<br>
       <em>para você</em>
     </h1>
     <p class="hero-subtitle fade-up delay-2">
@@ -1627,107 +1010,152 @@
     <div class="hero-actions fade-up delay-3">
       <a href="https://wa.me/5599992007182" class="btn-primary">
         <span>Montar meu protocolo</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="#produtos" class="btn-secondary">Ver Catálogo</a>
+      <a href="catalogo.html" class="btn-secondary">Ver catálogo</a>
     </div>
   </div>
 
-  <div class="hero-seals fade-up delay-4">
+  <div class="hero-seals fade-up delay-4" aria-hidden="true">
     <div class="seal">
       <div class="seal-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       </div>
-      <span class="seal-text">Entrega Grátis<br>em Codó</span>
+      <span class="seal-text">Entrega grátis<br>em Codó</span>
     </div>
     <div class="seal">
       <div class="seal-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
       </div>
-      <span class="seal-text">Produtos<br>Originais</span>
+      <span class="seal-text">Produtos<br>originais</span>
     </div>
     <div class="seal">
       <div class="seal-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
       </div>
-      <span class="seal-text">Atendimento<br>Especializado</span>
+      <span class="seal-text">Consultoria<br>especializada</span>
     </div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-wrap">
+<div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <div class="marquee-item">Fox For Men <span class="marquee-sep"></span></div>
     <div class="marquee-item">QOD Barber Shop <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Kits Profissionais <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Kits profissionais <span class="marquee-sep"></span></div>
     <div class="marquee-item">Distribuição Maranhão <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Óleo Para Barba <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Balm Modelador <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Pomada Capilar <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Skincare Masculino <span class="marquee-sep"></span></div>
-    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">Óleo para barba <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Balm modelador <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Pomada capilar <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Skincare masculino <span class="marquee-sep"></span></div>
     <div class="marquee-item">Fox For Men <span class="marquee-sep"></span></div>
     <div class="marquee-item">QOD Barber Shop <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Kits Profissionais <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Kits profissionais <span class="marquee-sep"></span></div>
     <div class="marquee-item">Distribuição Maranhão <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Óleo Para Barba <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Balm Modelador <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Pomada Capilar <span class="marquee-sep"></span></div>
-    <div class="marquee-item">Skincare Masculino <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Óleo para barba <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Balm modelador <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Pomada capilar <span class="marquee-sep"></span></div>
+    <div class="marquee-item">Skincare masculino <span class="marquee-sep"></span></div>
   </div>
 </div>
 
-<!-- CATEGORIAS -->
+<!-- CATEGORIAS — featured asymmetric grid -->
 <section class="categories">
   <div class="section-label fade-up">
     <span class="section-label-line"></span>
     <span>O que vendemos</span>
   </div>
-  <h2 class="section-title fade-up delay-1">LINHAS &amp; <em>CATEGORIAS</em></h2>
+  <h2 class="section-title fade-up delay-1">Linhas &amp; <em>categorias</em></h2>
   <div class="categories-grid">
-    <a href="#produtos" class="cat-card fade-up">
-      <span class="cat-icon">🧴</span>
-      <span class="cat-name">Óleos para Barba</span>
+
+    <a href="#produtos" class="cat-card cat-featured fade-up" data-label="ÓLEOS">
+      <div class="cat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C12 2 5 10 5 15a7 7 0 0014 0c0-5-7-13-7-13z"/>
+        </svg>
+      </div>
+      <span class="cat-name">Óleos para barba</span>
+      <span class="cat-desc">Hidratação profunda, crescimento acelerado e brilho natural. A base de qualquer protocolo de barba de verdade.</span>
       <span class="cat-count">Hidratação · Crescimento · Brilho</span>
       <span class="cat-arrow">→</span>
     </a>
+
     <a href="#produtos" class="cat-card fade-up delay-1">
-      <span class="cat-icon">🫧</span>
-      <span class="cat-name">Shampoo Barba</span>
-      <span class="cat-count">Limpeza · Suavidade · Aroma</span>
+      <div class="cat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="5" width="8" height="15" rx="2"/>
+          <path d="M10 5V3h4v2"/>
+          <line x1="10" y1="10" x2="14" y2="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+        </svg>
+      </div>
+      <span class="cat-name">Shampoo barba</span>
+      <span class="cat-count">Limpeza · Suavidade</span>
       <span class="cat-arrow">→</span>
     </a>
+
     <a href="#produtos" class="cat-card fade-up delay-2">
-      <span class="cat-icon">🔥</span>
-      <span class="cat-name">Balm Modelador</span>
-      <span class="cat-count">Fixação · Modelagem · Nutrição</span>
+      <div class="cat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="10" width="16" height="9" rx="2"/>
+          <rect x="6" y="6" width="12" height="5" rx="1"/>
+          <line x1="9" y1="6" x2="9" y2="4"/>
+          <line x1="15" y1="6" x2="15" y2="4"/>
+        </svg>
+      </div>
+      <span class="cat-name">Balm modelador</span>
+      <span class="cat-count">Fixação · Nutrição</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="#kits" class="cat-card fade-up delay-3">
-      <span class="cat-icon">✂️</span>
-      <span class="cat-name">Kits Premium</span>
-      <span class="cat-count">Completos · Presentes · Profissional</span>
+
+    <a href="#produtos" class="cat-card fade-up delay-3">
+      <div class="cat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+      </div>
+      <span class="cat-name">Skincare masculino</span>
+      <span class="cat-count">Limpeza · Anti-aging</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="#produtos" class="cat-card fade-up delay-4">
-      <span class="cat-icon">💈</span>
-      <span class="cat-name">Pomadas Capilares</span>
-      <span class="cat-count">Efeito · Fixação · Acabamento</span>
+
+    <a href="#kits" class="cat-card fade-up delay-1">
+      <div class="cat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+          <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+          <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+        </svg>
+      </div>
+      <span class="cat-name">Kits premium</span>
+      <span class="cat-count">Completos · Presentes</span>
       <span class="cat-arrow">→</span>
     </a>
-    <a href="#produtos" class="cat-card fade-up delay-5">
-      <span class="cat-icon">🧼</span>
-      <span class="cat-name">Skincare Masculino</span>
-      <span class="cat-count">Limpeza · Anti-aging · Proteção</span>
+
+    <a href="#produtos" class="cat-card fade-up delay-2">
+      <div class="cat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="7" width="18" height="5" rx="1"/>
+          <line x1="6" y1="12" x2="6" y2="17"/>
+          <line x1="10" y1="12" x2="10" y2="17"/>
+          <line x1="14" y1="12" x2="14" y2="17"/>
+          <line x1="18" y1="12" x2="18" y2="17"/>
+        </svg>
+      </div>
+      <span class="cat-name">Pomadas capilares</span>
+      <span class="cat-count">Fixação · Acabamento</span>
       <span class="cat-arrow">→</span>
     </a>
+
   </div>
 </section>
 
-<!-- PROTOCOLO QUASAR -->
+<!-- PROTOCOLO -->
 <section class="protocolo" id="protocolo">
-  <div class="protocolo-visual">
+  <div class="protocolo-visual" aria-hidden="true">
     <div class="protocolo-q">Q</div>
     <div class="protocolo-steps">
       <div class="step-dot active" data-step="0"></div>
@@ -1741,8 +1169,8 @@
       <span class="section-label-line"></span>
       <span>Diferencial Quasar</span>
     </div>
-    <h2 class="protocolo-headline fade-up delay-1">MAIS QUE ENTREGAR<br>PRODUTOS.</h2>
-    <div class="protocolo-subline fade-up delay-2">ENTREGAMOS<br>RESULTADOS.</div>
+    <h2 class="protocolo-headline fade-up delay-1">Mais que entregar<br>produtos.</h2>
+    <div class="protocolo-subline fade-up delay-2">Entregamos<br>resultados.</div>
     <p class="protocolo-text fade-up delay-3">
       O Protocolo Quasar identifica o tipo de barba do cliente e recomenda os produtos ideais para crescimento, hidratação, alinhamento e fortalecimento dos fios. Cada recomendação é personalizada para o seu perfil.
     </p>
@@ -1765,118 +1193,127 @@
       </div>
     </div>
     <a href="https://wa.me/5599992007182?text=Quero+fazer+meu+diagnóstico+Quasar" class="btn-primary fade-up delay-4">
-      <span>Fazer Meu Diagnóstico</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Fazer meu diagnóstico</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
+<!-- STATS BAR — editorial dark, animated numbers -->
+<div class="stats-bar" role="region" aria-label="Números da Quasar">
   <div class="stat-item fade-up">
-    <div class="stat-num">500+</div>
-    <div class="stat-label">Clientes Atendidos</div>
+    <div class="stat-num" data-target="500" data-suffix="+">100+</div>
+    <div class="stat-label">Clientes atendidos</div>
+    <div class="stat-context">Desde a fundação em Codó, MA</div>
   </div>
   <div class="stat-item fade-up delay-1">
-    <div class="stat-num">12+</div>
+    <div class="stat-num" data-target="12" data-suffix="+">3+</div>
     <div class="stat-label">Cidades no Maranhão</div>
+    <div class="stat-context">Envios para toda a região</div>
   </div>
   <div class="stat-item fade-up delay-2">
-    <div class="stat-num">98%</div>
-    <div class="stat-label">Satisfação</div>
+    <div class="stat-num" data-target="98" data-suffix="%">98%</div>
+    <div class="stat-label">Índice de satisfação</div>
+    <div class="stat-context">Baseado em avaliações diretas</div>
   </div>
   <div class="stat-item fade-up delay-3">
     <div class="stat-num">2h</div>
-    <div class="stat-label">Resposta WhatsApp</div>
+    <div class="stat-label">Resposta no WhatsApp</div>
+    <div class="stat-context">Atendimento de segunda a sábado</div>
   </div>
 </div>
 
-<!-- PRODUTOS EM DESTAQUE -->
+<!-- PRODUTOS EM DESTAQUE — spotlight effect -->
 <section class="produtos" id="produtos">
   <div class="produtos-header">
     <div>
       <div class="section-label fade-up">
         <span class="section-label-line"></span>
-        <span>Mais Vendidos</span>
+        <span>Mais vendidos</span>
       </div>
-      <h2 class="section-title fade-up delay-1">PRODUTOS <em>EM<br>DESTAQUE</em></h2>
+      <h2 class="section-title fade-up delay-1">Produtos <em>em<br>destaque</em></h2>
     </div>
-    <a href="https://wa.me/5599992007182?text=Quero+ver+o+catálogo+completo" class="btn-secondary fade-up delay-2" style="align-self: flex-end;">Ver Tudo →</a>
+    <a href="catalogo.html" class="btn-secondary fade-up delay-2" style="align-self: flex-end;">Ver catálogo completo →</a>
   </div>
 
   <div class="produtos-grid" id="kits">
     <div class="prod-card fade-up">
+      <div class="prod-spotlight" aria-hidden="true"></div>
       <div class="prod-visual">
-        <div class="prod-badge">Mais Vendido</div>
-        <img src="prod-kit-barba.png" alt="Kit Barba Completo Premium Fox For Men" loading="lazy">
+        <div class="prod-badge">Mais vendido</div>
+        <img src="prod-kit-barba.png" alt="Kit Barba Completo Premium Fox For Men — shampoo, óleo e balm" loading="lazy">
       </div>
       <div class="prod-info">
         <div class="prod-brand">Fox For Men</div>
         <div class="prod-name">Kit Barba Completo Premium</div>
         <div class="prod-desc">Shampoo + Óleo + Balm. Tudo que sua barba precisa em um único kit profissional.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 119,90</div>
-          <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Kit+Barba+Completo+Fox+For+Men')">Pedir Agora</button>
+          <div class="prod-price">R$&nbsp;119,90</div>
+          <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Kit+Barba+Completo+Fox+For+Men')">Pedir agora</button>
         </div>
       </div>
     </div>
 
     <div class="prod-card fade-up delay-1">
+      <div class="prod-spotlight" aria-hidden="true"></div>
       <div class="prod-visual" style="height:220px;">
-        <img src="prod-oleo-qod.webp" alt="Óleo Para Barba QOD Barber Shop" loading="lazy">
+        <img src="prod-oleo-qod.webp" alt="Óleo Para Barba QOD Barber Shop 25ml" loading="lazy">
       </div>
       <div class="prod-info">
         <div class="prod-brand">QOD Barber Shop</div>
-        <div class="prod-name">Óleo Para Barba 25ml</div>
+        <div class="prod-name">Óleo para barba 25ml</div>
         <div class="prod-desc">Hidratação e toque seco. Beard oil profissional.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 36,90</div>
+          <div class="prod-price">R$&nbsp;36,90</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Óleo+Para+Barba+QOD')">Pedir</button>
         </div>
       </div>
     </div>
 
     <div class="prod-card fade-up delay-2">
+      <div class="prod-spotlight" aria-hidden="true"></div>
       <div class="prod-visual" style="height:220px;">
-        <img src="prod-balm%20fox%20for%20man.png" alt="Balm Hidratante Fox For Men" loading="lazy">
+        <img src="prod-balm%20fox%20for%20man.png" alt="Balm Hidratante Para Barba Fox For Men" loading="lazy">
       </div>
       <div class="prod-info">
         <div class="prod-brand">Fox For Men</div>
-        <div class="prod-name">Balm Hidratante Para Barba</div>
+        <div class="prod-name">Balm hidratante para barba</div>
         <div class="prod-desc">Modela, hidrata e dá brilho natural aos fios.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 32,40</div>
+          <div class="prod-price">R$&nbsp;32,40</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Balm+Hidratante+Fox+For+Men')">Pedir</button>
         </div>
       </div>
     </div>
 
     <div class="prod-card fade-up delay-1">
+      <div class="prod-spotlight" aria-hidden="true"></div>
       <div class="prod-visual" style="height:220px;">
-        <img src="prod-lemon-gin.webp" alt="Loção Pós Barba Lemon Gin QOD" loading="lazy">
+        <img src="prod-lemon-gin.webp" alt="Loção Pós Barba Lemon Gin QOD Barber Shop 100ml" loading="lazy">
       </div>
       <div class="prod-info">
         <div class="prod-brand">QOD Barber Shop</div>
-        <div class="prod-name">Loção Pós Barba Lemon Gin</div>
-        <div class="prod-desc">After Shave 100ml. Limão, zimbro e pimenta preta.</div>
+        <div class="prod-name">Loção pós barba Lemon Gin</div>
+        <div class="prod-desc">After shave 100ml. Limão, zimbro e pimenta preta.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 39,90</div>
+          <div class="prod-price">R$&nbsp;39,90</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+a+Loção+Pós+Barba+Lemon+Gin+QOD')">Pedir</button>
         </div>
       </div>
     </div>
 
     <div class="prod-card fade-up delay-2">
+      <div class="prod-spotlight" aria-hidden="true"></div>
       <div class="prod-visual" style="height:220px;">
-        <div class="prod-badge" style="background: var(--gold); color: var(--black); border: 1px solid var(--gold);">Novidade</div>
-        <img src="prod-kit-whisky.webp" alt="Kit Shampoo Whisky + Carteira QOD" loading="lazy">
+        <div class="prod-badge">Novidade</div>
+        <img src="prod-kit-whisky.webp" alt="Kit Shampoo Whisky QOD Barber Shop com carteira exclusiva" loading="lazy">
       </div>
       <div class="prod-info">
         <div class="prod-brand">QOD Barber Shop</div>
-        <div class="prod-name">Kit Shampoo Whisky + Carteira</div>
+        <div class="prod-name">Kit Shampoo Whisky + carteira</div>
         <div class="prod-desc">Shampoo 220ml Black Collection + carteira exclusiva.</div>
         <div class="prod-footer">
-          <div class="prod-price">R$ 55,00</div>
+          <div class="prod-price">R$&nbsp;55,00</div>
           <button class="prod-buy" onclick="window.open('https://wa.me/5599992007182?text=Quero+o+Kit+Shampoo+Whisky+%2B+Carteira+QOD')">Pedir</button>
         </div>
       </div>
@@ -1884,53 +1321,47 @@
   </div>
 </section>
 
-<!-- PROVA SOCIAL -->
+<!-- AVALIAÇÕES -->
 <section class="social">
   <div class="section-label fade-up">
     <span class="section-label-line"></span>
     <span>O que dizem sobre nós</span>
   </div>
-  <h2 class="section-title fade-up delay-1">CLIENTES <em>QUE<br>CONFIAM</em></h2>
-  <div class="social-grid">
-    <div class="review-card fade-up delay-1">
-      <div class="review-stars">
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-      </div>
+  <h2 class="section-title fade-up delay-1">Clientes <em>que<br>confiam</em></h2>
+  <div class="social-grid" role="list" aria-label="Avaliações de clientes">
+    <article class="review-card fade-up delay-1" role="listitem">
+      <div class="review-stars" aria-label="5 estrelas"><span class="star">★★★★★</span></div>
       <p class="review-text">Minha barba mudou completamente depois das recomendações da Quasar. O protocolo deles é certeiro — nunca mais errei na hora de comprar.</p>
       <div class="review-author">
-        <div class="review-avatar">RM</div>
+        <div class="review-avatar" aria-hidden="true">RM</div>
         <div>
-          <div class="review-name">Rafael Moura</div>
+          <div class="review-name">Walacy Leite</div>
           <div class="review-city">Codó, MA</div>
         </div>
       </div>
-    </div>
-    <div class="review-card fade-up delay-2">
-      <div class="review-stars">
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-      </div>
+    </article>
+    <article class="review-card fade-up delay-2" role="listitem">
+      <div class="review-stars" aria-label="5 estrelas"><span class="star">★★★★★</span></div>
       <p class="review-text">Recebo no mesmo dia, produtos originais e o atendimento pelo WhatsApp é rápido demais. Aqui em Codó não tinha distribuidora assim, valeu muito.</p>
       <div class="review-author">
-        <div class="review-avatar">JS</div>
+        <div class="review-avatar" aria-hidden="true">JS</div>
         <div>
-          <div class="review-name">João Silva</div>
+          <div class="review-name">Marcos Vinicius</div>
           <div class="review-city">Codó, MA</div>
         </div>
       </div>
-    </div>
-    <div class="review-card fade-up delay-3">
-      <div class="review-stars">
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-      </div>
+    </article>
+    <article class="review-card fade-up delay-3" role="listitem">
+      <div class="review-stars" aria-label="5 estrelas"><span class="star">★★★★★</span></div>
       <p class="review-text">Comecei com o kit básico e hoje compro todo mês. O óleo Fox For Men é sensacional, barba sempre alinhada. A Quasar virou minha referência.</p>
       <div class="review-author">
-        <div class="review-avatar">TC</div>
+        <div class="review-avatar" aria-hidden="true">TC</div>
         <div>
-          <div class="review-name">Thiago Costa</div>
-          <div class="review-city">Codó, MA</div>
+          <div class="review-name">André Caetano</div>
+          <div class="review-city">Caxias, MA</div>
         </div>
       </div>
-    </div>
+    </article>
   </div>
 </section>
 
@@ -1940,31 +1371,31 @@
     <span class="section-label-line"></span>
     <span>Quem somos</span>
   </div>
-  <h2 class="section-title fade-up delay-1">SOBRE A <em>QUASAR</em></h2>
+  <h2 class="section-title fade-up delay-1">Sobre a <em>Quasar</em></h2>
   <div class="sobre-content fade-up delay-2">
     <p>A Quasar Barber nasceu em Codó, Maranhão, com um propósito claro: levar ao interior produtos profissionais de barba e cabelo que antes só chegavam às grandes cidades. Trabalhamos com as melhores marcas do mercado — Fox For Men e QOD Barber Shop — para garantir qualidade real em cada pedido.</p>
     <p>Mais do que uma distribuidora, somos referência em cuidado masculino no Maranhão. Atendimento rápido pelo WhatsApp, entrega no mesmo dia em Codó e consultoria gratuita para montar seu protocolo ideal.</p>
   </div>
-  <div class="sobre-valores fade-up delay-3">
-    <div class="sobre-valor">
-      <div class="sobre-valor-icon">★</div>
+  <div class="sobre-valores">
+    <div class="sobre-valor fade-up delay-2">
+      <div class="sobre-valor-num">01</div>
       <div class="sobre-valor-title">Qualidade</div>
       <div class="sobre-valor-text">Só produtos originais das melhores marcas do mercado</div>
     </div>
-    <div class="sobre-valor">
-      <div class="sobre-valor-icon">⚡</div>
+    <div class="sobre-valor fade-up delay-3">
+      <div class="sobre-valor-num">02</div>
       <div class="sobre-valor-title">Agilidade</div>
       <div class="sobre-valor-text">Entrega no mesmo dia em Codó, MA</div>
     </div>
-    <div class="sobre-valor">
-      <div class="sobre-valor-icon">💬</div>
+    <div class="sobre-valor fade-up delay-4">
+      <div class="sobre-valor-num">03</div>
       <div class="sobre-valor-title">Atendimento</div>
       <div class="sobre-valor-text">Suporte direto pelo WhatsApp, sempre disponível</div>
     </div>
   </div>
 </section>
 
-<!-- INSTAGRAM -->
+<!-- INSTAGRAM — featured grid -->
 <section class="instagram">
   <div class="instagram-header">
     <div>
@@ -1972,37 +1403,55 @@
         <span class="section-label-line"></span>
         <span>Siga no Instagram</span>
       </div>
-      <h2 class="section-title fade-up delay-1">@QUASAR<em>_BARBER</em></h2>
+      <h2 class="section-title fade-up delay-1">@quasar<em>_barber</em></h2>
     </div>
-    <a href="https://instagram.com/quasar_barber" class="btn-primary fade-up delay-2" style="align-self:flex-end;">
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="btn-primary fade-up delay-2" style="align-self:flex-end;">
       <span>Seguir</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
   <div class="insta-grid">
-    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up">
+    <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile insta-featured fade-up">
       <img src="insta-pomadas.png" alt="Pomadas Fox For Men" loading="lazy" class="insta-img">
-      <div class="insta-overlay"><div class="insta-icon">🎨</div><div class="insta-type">Pomadas</div></div>
+      <div class="insta-overlay" aria-hidden="true">
+        <div class="insta-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg></div>
+        <div class="insta-type">Pomadas</div>
+      </div>
     </a>
     <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-1">
       <img src="insta-lifestyle.jpeg" alt="QOD Whisky Lifestyle" loading="lazy" class="insta-img">
-      <div class="insta-overlay"><div class="insta-icon">✨</div><div class="insta-type">Lifestyle</div></div>
+      <div class="insta-overlay" aria-hidden="true">
+        <div class="insta-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg></div>
+        <div class="insta-type">Lifestyle</div>
+      </div>
     </a>
     <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-2">
       <img src="insta-greencoffee.png" alt="QOD Green Coffee Shampoo" loading="lazy" class="insta-img">
-      <div class="insta-overlay"><div class="insta-icon">🌿</div><div class="insta-type">Shampoo</div></div>
+      <div class="insta-overlay" aria-hidden="true">
+        <div class="insta-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg></div>
+        <div class="insta-type">Shampoo</div>
+      </div>
     </a>
     <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-1">
       <img src="insta-kitbarba.jpeg" alt="Kit Barba Fox For Men" loading="lazy" class="insta-img">
-      <div class="insta-overlay"><div class="insta-icon">🪒</div><div class="insta-type">Kit Barba</div></div>
+      <div class="insta-overlay" aria-hidden="true">
+        <div class="insta-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg></div>
+        <div class="insta-type">Kit barba</div>
+      </div>
     </a>
     <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-2">
       <img src="insta-capilar.jpeg" alt="Fox For Men Capilar" loading="lazy" class="insta-img">
-      <div class="insta-overlay"><div class="insta-icon">💈</div><div class="insta-type">Capilar</div></div>
+      <div class="insta-overlay" aria-hidden="true">
+        <div class="insta-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg></div>
+        <div class="insta-type">Capilar</div>
+      </div>
     </a>
     <a href="https://instagram.com/quasar_barber" target="_blank" rel="noopener" class="insta-tile fade-up delay-3">
       <img src="insta-qod.png" alt="QOD Barber Shop Premium" loading="lazy" class="insta-img">
-      <div class="insta-overlay"><div class="insta-icon">⭐</div><div class="insta-type">QOD Premium</div></div>
+      <div class="insta-overlay" aria-hidden="true">
+        <div class="insta-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/></svg></div>
+        <div class="insta-type">QOD premium</div>
+      </div>
     </a>
   </div>
 </section>
@@ -2013,60 +1462,71 @@
     <span class="section-label-line"></span>
     <span>Fale conosco</span>
   </div>
-  <h2 class="section-title fade-up delay-1">ENTRE EM <em>CONTATO</em></h2>
+  <h2 class="section-title fade-up delay-1">Entre em <em>contato</em></h2>
   <div class="contato-grid">
-    <div class="contato-info fade-up delay-2">
+    <div class="fade-up delay-2">
       <div class="contato-info-title">Atendimento Quasar</div>
       <a href="https://wa.me/5599992007182" class="contato-detail" target="_blank" rel="noopener">
-        <div class="contato-detail-icon">📱</div>
+        <div class="contato-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
         <div>
           <div style="color:var(--white);font-weight:500;">WhatsApp</div>
           <div style="font-size:13px;">(99) 99200-7182</div>
         </div>
       </a>
       <a href="https://instagram.com/quasar_barber" class="contato-detail" target="_blank" rel="noopener">
-        <div class="contato-detail-icon">📸</div>
+        <div class="contato-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
         <div>
           <div style="color:var(--white);font-weight:500;">Instagram</div>
           <div style="font-size:13px;">@quasar_barber</div>
         </div>
       </a>
       <div class="contato-detail">
-        <div class="contato-detail-icon">📍</div>
+        <div class="contato-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
         <div>
           <div style="color:var(--white);font-weight:500;">Localização</div>
           <div style="font-size:13px;">Codó, Maranhão</div>
         </div>
       </div>
     </div>
-    <div class="fade-up delay-2">
-      <form name="contato" method="POST" netlify id="contatoForm">
+    <div class="fade-up delay-3">
+      <form name="contato" method="POST" netlify id="contatoForm" novalidate>
         <input type="hidden" name="form-name" value="contato">
         <div class="form-group">
           <label class="form-label" for="nome">Nome</label>
-          <input class="form-input" type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+          <input class="form-input" type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name">
+          <span class="form-error" id="erro-nome">Informe seu nome.</span>
         </div>
         <div class="form-group">
           <label class="form-label" for="whatsapp">WhatsApp</label>
-          <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="(99) 9 9999-9999">
+          <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="(99) 9 9999-9999" autocomplete="tel">
         </div>
         <div class="form-group">
           <label class="form-label" for="mensagem">Mensagem</label>
-          <textarea class="form-textarea" id="mensagem" name="mensagem" placeholder="Como podemos ajudar?" required></textarea>
+          <textarea class="form-textarea" id="mensagem" name="mensagem" placeholder="Como podemos ajudar?"></textarea>
+          <span class="form-error" id="erro-mensagem">Escreva uma mensagem.</span>
         </div>
         <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
-          <span>Enviar Mensagem</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Enviar mensagem</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
-      <div class="form-success" id="formSuccess">
-        <div class="form-success-icon">✓</div>
-        <div class="form-success-title">Mensagem Enviada!</div>
+      <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+        <div class="form-success-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="form-success-title">Mensagem enviada</div>
         <div class="form-success-text">Recebemos seu contato. Retornaremos em breve pelo WhatsApp.</div>
       </div>
     </div>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -2076,13 +1536,16 @@
       <p class="footer-tagline">Distribuidora especializada em produtos profissionais para barba, cabelo e cuidados masculinos no interior do Maranhão.</p>
       <div class="footer-contact">
         <a href="https://wa.me/5599992007182">
-          <span class="contact-icon">📱</span> WhatsApp: (99) 99200-7182
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          WhatsApp: (99) 99200-7182
         </a>
         <a href="https://instagram.com/quasar_barber">
-          <span class="contact-icon">📸</span> @quasar_barber
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+          @quasar_barber
         </a>
-        <span style="display:flex;align-items:center;gap:8px;">
-          <span class="contact-icon">📍</span> Codó, Maranhão
+        <span class="footer-contact-span">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Codó, Maranhão
         </span>
       </div>
     </div>
@@ -2093,7 +1556,7 @@
         <li><a href="#produtos">Produtos</a></li>
         <li><a href="#protocolo">Protocolo Quasar</a></li>
         <li><a href="#kits">Kits</a></li>
-        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#sobre">Sobre nós</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
     </div>
@@ -2102,10 +1565,10 @@
       <ul class="footer-links">
         <li><a href="#produtos">Fox For Men</a></li>
         <li><a href="#produtos">QOD Barber Shop</a></li>
-        <li><a href="#produtos">Óleos para Barba</a></li>
-        <li><a href="#produtos">Pomadas Capilares</a></li>
-        <li><a href="#kits">Kits Premium</a></li>
-        <li><a href="#produtos">Skincare Masculino</a></li>
+        <li><a href="#produtos">Óleos para barba</a></li>
+        <li><a href="#produtos">Pomadas capilares</a></li>
+        <li><a href="#kits">Kits premium</a></li>
+        <li><a href="#produtos">Skincare masculino</a></li>
       </ul>
     </div>
     <div>
@@ -2116,122 +1579,181 @@
         <span class="pay-tag">Dinheiro</span>
         <span class="pay-tag">Boleto</span>
       </div>
-      <div style="margin-top:32px;">
-        <div class="footer-col-title">Entrega</div>
-        <div style="font-size:13px; color:var(--text-dim); line-height:1.7;">
-          🟡 Entrega grátis em Codó<br>
-          📦 Envio para toda a região<br>
-          ⚡ Pedidos via WhatsApp
-        </div>
+      <div class="footer-deliver">
+        <div class="footer-col-title" style="margin-top:32px;margin-bottom:12px;">Entrega</div>
+        <div class="footer-deliver-item">Entrega grátis em Codó</div>
+        <div class="footer-deliver-item">Envio para toda a região</div>
+        <div class="footer-deliver-item">Pedidos via WhatsApp</div>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 <span>Quasar Barber</span> — Todos os direitos reservados</span>
     <ul class="footer-legal">
-      <li><a href="#">Política de Privacidade</a></li>
-      <li><a href="#">Termos de Uso</a></li>
-      <li><a href="#">Trocas e Devoluções</a></li>
+      <li><a href="#">Política de privacidade</a></li>
+      <li><a href="#">Termos de uso</a></li>
+      <li><a href="#">Trocas e devoluções</a></li>
     </ul>
   </div>
 </footer>
 
+<!-- BACK TO TOP -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
 <!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/5599992007182?text=Olá!+Vim+pelo+site+da+Quasar+Barber" class="whatsapp-float" title="Fale Conosco">
-  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+<a href="https://wa.me/5599992007182?text=Olá!+Vim+pelo+site+da+Quasar+Barber" class="whatsapp-float" title="Fale conosco pelo WhatsApp" aria-label="Fale conosco pelo WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
 
 <script>
-  // Custom cursor — only on hover-capable devices
+(function() {
+  // Custom cursor — hover devices only
   if (window.matchMedia('(hover: hover)').matches) {
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
-
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
       cursor.style.left = mx + 'px';
       cursor.style.top = my + 'px';
     });
-
-    function animateRing() {
+    (function animateRing() {
       rx += (mx - rx) * 0.12;
       ry += (my - ry) * 0.12;
       ring.style.left = rx + 'px';
       ring.style.top = ry + 'px';
       requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
+    })();
     document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        ring.style.width = '50px';
-        ring.style.height = '50px';
-        ring.style.borderColor = 'rgba(255,204,0,0.8)';
-      });
-      el.addEventListener('mouseleave', () => {
-        ring.style.width = '32px';
-        ring.style.height = '32px';
-        ring.style.borderColor = 'rgba(255,204,0,0.5)';
-      });
+      el.addEventListener('mouseenter', () => { ring.style.width='50px'; ring.style.height='50px'; ring.style.borderColor='rgba(255,204,0,0.8)'; });
+      el.addEventListener('mouseleave', () => { ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(255,204,0,0.5)'; });
     });
   }
 
-  // Nav scroll state
+  // Refs
   const mainNav = document.getElementById('mainNav');
+  const progressBar = document.getElementById('progress-bar');
+  const backToTop = document.getElementById('backToTop');
+
+  // Scroll handler
   window.addEventListener('scroll', () => {
-    mainNav.classList.toggle('scrolled', window.scrollY > 60);
+    const y = window.scrollY;
+    mainNav.classList.toggle('scrolled', y > 60);
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (total > 0 ? (y / total) * 100 : 0) + '%';
+    backToTop.classList.toggle('visible', y > 500);
   }, { passive: true });
+
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // Mobile nav
   const hamburger = document.getElementById('navHamburger');
   const overlay = document.getElementById('navOverlay');
   const closeBtn = document.getElementById('navClose');
+  hamburger.addEventListener('click', () => { overlay.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); });
+  closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); });
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { overlay.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); }));
 
-  hamburger.addEventListener('click', () => overlay.classList.add('open'));
-  closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-  overlay.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => overlay.classList.remove('open'));
-  });
-
-  // Scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+  // Fade-up IntersectionObserver
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // Protocolo step dots — sync with feat-items
+  // Protocolo step dots
   const dots = document.querySelectorAll('.step-dot');
   const featItems = document.querySelectorAll('.feat-item');
-
-  function setActiveStep(index) {
+  function setStep(i) {
     dots.forEach(d => d.classList.remove('active'));
     featItems.forEach(f => f.classList.remove('active'));
-    if (dots[index]) dots[index].classList.add('active');
-    if (featItems[index]) featItems[index].classList.add('active');
+    if (dots[i]) dots[i].classList.add('active');
+    if (featItems[i]) featItems[i].classList.add('active');
   }
+  dots.forEach((d,i) => d.addEventListener('click', () => setStep(i)));
+  featItems.forEach((f,i) => f.addEventListener('click', () => setStep(i)));
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => setActiveStep(i));
+  // Stats count-up
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    const parentItem = el.closest('.stat-item');
+    function update(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(update);
+      else {
+        el.textContent = target + suffix;
+        if (parentItem) parentItem.classList.add('counted');
+      }
+    }
+    requestAnimationFrame(update);
+  }
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.animated) {
+        e.target.dataset.animated = '1';
+        animateCounter(e.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => statsObs.observe(el));
+
+  // Spotlight effect on product cards
+  document.querySelectorAll('.prod-card').forEach(card => {
+    const spotlight = card.querySelector('.prod-spotlight');
+    if (!spotlight) return;
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      spotlight.style.setProperty('--mx', x + '%');
+      spotlight.style.setProperty('--my', y + '%');
+    });
   });
 
-  featItems.forEach((item, i) => {
-    item.addEventListener('click', () => setActiveStep(i));
-  });
-
-  // Netlify Forms — inline success + WhatsApp redirect
+  // Form validation + submit
   const contatoForm = document.getElementById('contatoForm');
   const formSuccess = document.getElementById('formSuccess');
   if (contatoForm) {
+    const nomeInput = document.getElementById('nome');
+    const msgInput  = document.getElementById('mensagem');
+    const erroNome  = document.getElementById('erro-nome');
+    const erroMsg   = document.getElementById('erro-mensagem');
+
+    function validate() {
+      let ok = true;
+      if (!nomeInput.value.trim()) {
+        nomeInput.classList.add('invalid');
+        erroNome.classList.add('visible');
+        ok = false;
+      } else {
+        nomeInput.classList.remove('invalid');
+        erroNome.classList.remove('visible');
+      }
+      if (!msgInput.value.trim()) {
+        msgInput.classList.add('invalid');
+        erroMsg.classList.add('visible');
+        ok = false;
+      } else {
+        msgInput.classList.remove('invalid');
+        erroMsg.classList.remove('visible');
+      }
+      return ok;
+    }
+
+    nomeInput.addEventListener('input', () => { if (nomeInput.value.trim()) { nomeInput.classList.remove('invalid'); erroNome.classList.remove('visible'); }});
+    msgInput.addEventListener('input', () => { if (msgInput.value.trim()) { msgInput.classList.remove('invalid'); erroMsg.classList.remove('visible'); }});
+
     contatoForm.addEventListener('submit', e => {
       e.preventDefault();
+      if (!validate()) return;
       const data = new FormData(contatoForm);
       const nome = data.get('nome') || '';
       const whatsapp = data.get('whatsapp') || '';
@@ -2245,6 +1767,7 @@
         });
     });
   }
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,972 @@
+<!-- Quasar Barber — Catálogo · Supabase: tabela produtos (id, nome, categoria, unidade, estoque, custo, preco, created_at) -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catálogo completo Quasar Barber — Fox For Men, QOD Barber Shop. Óleos, shampoos, balms, kits e pomadas. Entrega em Codó, MA.">
+<title>Catálogo — Quasar Barber</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080808'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='serif' font-size='20' fill='%23ffcc00'>Q</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #ffcc00;
+  --gold-dim: #c9a000;
+  --gold-glow: rgba(255,204,0,0.14);
+  --black: #0a0a0a;
+  --black-2: #121212;
+  --black-3: #181818;
+  --black-4: #222222;
+  --gray: #2c2c2c;
+  --text-dim: #999;
+  --text-mid: #bbb;
+  --white: #f2f2f0;
+}
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+@media (hover: none) { body { cursor: auto; } .cursor, .cursor-ring { display: none; } }
+
+.skip-link {
+  position: fixed; top: -100%; left: 16px; z-index: 99999;
+  background: var(--gold); color: var(--black);
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 12px 24px; text-decoration: none; border-radius: 0 0 6px 6px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+a:focus-visible, button:focus-visible { outline-offset: 4px; }
+
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: var(--gold); z-index: 10000; pointer-events: none;
+  transition: width 0.06s linear;
+}
+.cursor {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  position: fixed; width: 32px; height: 32px;
+  border: 1px solid rgba(255,204,0,0.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998; transform: translate(-50%,-50%);
+  transition: all 0.18s ease;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9997; opacity: 0.4;
+}
+
+/* MOBILE NAV OVERLAY */
+.nav-mobile-overlay {
+  display: none; position: fixed; inset: 0; z-index: 600;
+  background: var(--black); flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+.nav-mobile-overlay.open { display: flex; }
+.nav-close {
+  position: absolute; top: 28px; right: 28px;
+  background: none; border: none; color: var(--white);
+  font-size: 28px; cursor: pointer; line-height: 1; transition: color 0.2s;
+}
+.nav-close:hover { color: var(--gold); }
+.nav-mobile-links {
+  list-style: none; text-align: center;
+  display: flex; flex-direction: column; gap: 4px; margin-bottom: 40px;
+}
+.nav-mobile-links a {
+  font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+  letter-spacing: 0.1em; color: var(--text-dim);
+  text-decoration: none; transition: color 0.2s; display: block; padding: 4px 0;
+}
+.nav-mobile-links a:hover { color: var(--gold); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 60px;
+  background: linear-gradient(180deg, rgba(10,10,10,0.96) 0%, transparent 100%);
+  backdrop-filter: blur(2px); transition: background 0.3s, backdrop-filter 0.3s;
+}
+nav.scrolled { background: rgba(10,10,10,0.98); backdrop-filter: blur(14px); }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  letter-spacing: 0.15em; color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); text-decoration: none; transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s ease;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--gold); }
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--black); background: var(--gold); padding: 10px 24px;
+  border-radius: 6px; text-decoration: none; transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--white); transform: translateY(-1px); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 8px;
+}
+.nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+
+/* PAGE HEADER */
+.catalog-header {
+  padding: 160px 60px 80px;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(255,204,0,0.05) 0%, transparent 60%),
+    var(--black-2);
+  position: relative; overflow: hidden;
+}
+.catalog-header-decor {
+  position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 280px; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,204,0,0.04);
+  pointer-events: none; user-select: none; letter-spacing: -0.02em;
+}
+.catalog-header-content { max-width: 600px; position: relative; z-index: 1; }
+.section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.section-label span {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);
+}
+.section-label-line { width: 32px; height: 1px; background: var(--gold); opacity: 0.5; }
+.catalog-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 0.92; letter-spacing: 0.03em; color: var(--white); margin-bottom: 20px;
+}
+.catalog-title em { font-style: normal; color: var(--gold); }
+.catalog-subtitle {
+  font-size: 15px; font-weight: 300; line-height: 1.75; color: #999;
+  max-width: 440px; text-wrap: pretty;
+}
+
+/* FILTER BAR */
+.filter-section {
+  background: var(--black-3);
+  border-bottom: 1px solid rgba(255,204,0,0.06);
+  padding: 24px 60px;
+  position: sticky; top: 73px; z-index: 50;
+  backdrop-filter: blur(12px);
+}
+.filter-bar {
+  display: flex; gap: 8px; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+  padding-bottom: 2px;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); background: var(--black-4);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 18px; border-radius: 4px; cursor: pointer; transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-btn:hover { color: var(--white); border-color: rgba(255,204,0,0.25); }
+.filter-btn.active {
+  background: var(--gold); color: var(--black); border-color: var(--gold);
+}
+.filter-count {
+  font-size: 10px; font-weight: 400; opacity: 0.65;
+  background: rgba(0,0,0,0.12); padding: 2px 6px; border-radius: 10px;
+}
+.filter-btn.active .filter-count { background: rgba(0,0,0,0.18); opacity: 0.8; }
+
+/* CATALOG SECTION */
+.catalog-section { padding: 48px 60px 100px; background: var(--black-3); }
+.catalog-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 40px;
+}
+.catalog-count {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* PRODUCT GRID */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px; min-height: 300px;
+}
+
+/* PRODUCT CARDS */
+.prod-card {
+  background: var(--black-2);
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.prod-spotlight {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(255,204,0,0.07) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.prod-card:hover .prod-spotlight { opacity: 1; }
+.prod-visual {
+  height: 180px; background: var(--black-2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid rgba(255,204,0,0.06);
+}
+.prod-card:hover .prod-visual { background: #111; }
+.prod-visual.has-img { background: #f8f8f8; }
+.prod-card:hover .prod-visual.has-img { background: #f0f0f0; }
+.prod-visual img {
+  max-width: 72%; max-height: 78%; width: auto; height: auto;
+  object-fit: contain; opacity: 0;
+  transition: transform 0.42s ease, opacity 0.35s ease;
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));
+}
+.prod-visual img.loaded { opacity: 1; }
+.prod-card:hover .prod-visual img { transform: scale(1.05); }
+.prod-img-fallback {
+  width: 100%; height: 100%;
+  align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 100px; line-height: 1;
+  color: rgba(255,204,0,0.08); letter-spacing: 0.05em; display: flex;
+  transition: color 0.3s;
+}
+.prod-card:hover .prod-img-fallback { color: rgba(255,204,0,0.13); }
+.prod-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 5px 11px; background: var(--gold); color: var(--black);
+}
+.prod-badge-out {
+  background: rgba(224,82,82,0.15) !important; color: #e05252 !important;
+  border: 1px solid rgba(224,82,82,0.25);
+}
+.prod-badge-new {
+  left: auto; right: 14px;
+  background: rgba(0,200,100,0.12); color: #00c864;
+  border: 1px solid rgba(0,200,100,0.28);
+}
+.prod-unidade {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 16px;
+}
+.prod-buy-out {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--text-dim); background: var(--black-4); padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; white-space: nowrap;
+  cursor: not-allowed;
+}
+.prod-info { padding: 24px; position: relative; z-index: 1; }
+.prod-brand {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+.prod-name {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 18px;
+  font-weight: 700; letter-spacing: 0.05em; color: var(--white); margin-bottom: 6px;
+  line-height: 1.2;
+}
+.prod-desc {
+  font-size: 12px; color: var(--text-dim); line-height: 1.6;
+  margin-bottom: 18px; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.prod-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.prod-price {
+  font-family: 'Bebas Neue', sans-serif; font-size: 26px;
+  letter-spacing: 0.05em; color: var(--gold); font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.prod-buy {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--black); background: var(--gold); padding: 10px 18px;
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.2s, transform 0.15s; white-space: nowrap;
+  text-decoration: none; display: inline-block;
+}
+.prod-buy:hover { background: var(--white); }
+.prod-buy:active { transform: scale(0.97); }
+
+/* SKELETON LOADING */
+.prod-card.skel { pointer-events: none; }
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skel-pulse {
+  background: linear-gradient(90deg, var(--black-3) 25%, var(--black-4) 50%, var(--black-3) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: 2px;
+}
+.skel .prod-visual {
+  background: linear-gradient(90deg, var(--black-3) 25%, #1e1e1e 50%, var(--black-3) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+.skel-line { height: 11px; margin-bottom: 10px; }
+.skel-btn { width: 72px; height: 36px; border-radius: 4px; }
+.w35 { width: 35%; }
+.w65 { width: 65%; }
+.w80 { width: 80%; }
+.w50 { width: 50%; }
+
+/* EMPTY / ERROR STATES */
+.empty-state {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 100px 20px; text-align: center; color: var(--text-dim);
+}
+.empty-icon { color: rgba(255,204,0,0.25); margin-bottom: 24px; }
+.empty-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+  letter-spacing: 0.05em; color: var(--white); margin-bottom: 10px;
+}
+.empty-text { font-size: 14px; color: var(--text-dim); line-height: 1.65; max-width: 360px; text-wrap: pretty; }
+
+/* BUTTONS */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--black); background: var(--gold);
+  padding: 16px 36px; border-radius: 6px; text-decoration: none;
+  transition: background 0.25s, transform 0.15s; position: relative; overflow: hidden;
+  border: none; cursor: pointer;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0; background: var(--white);
+  transform: translateX(-101%); transition: transform 0.3s ease;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.97) translateY(0); }
+
+/* FADE-UP */
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.65s ease var(--delay, 0s), transform 0.65s ease var(--delay, 0s);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* FOOTER */
+footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08); }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px; padding: 80px 60px;
+}
+.footer-brand-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 40px;
+  letter-spacing: 0.15em; margin-bottom: 16px;
+}
+.footer-brand-name span { color: var(--gold); }
+.footer-tagline {
+  font-size: 13px; color: var(--text-dim); line-height: 1.75;
+  margin-bottom: 32px; max-width: 260px; text-wrap: pretty;
+}
+.footer-contact { display: flex; flex-direction: column; gap: 10px; }
+.footer-contact a {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.2s;
+}
+.footer-contact a:hover { color: var(--gold); }
+.footer-contact-span {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+  font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid);
+}
+.contact-icon { color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; display: inline-flex; align-items: center; }
+.contact-icon svg { width: 16px; height: 16px; stroke: currentColor; }
+.footer-col-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+  font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 28px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 12px; list-style: none; }
+.footer-links a { font-size: 13px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-payments { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.pay-tag {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-dim); border: 1px solid var(--gray); padding: 6px 10px;
+}
+.footer-deliver { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+.footer-deliver-item {
+  font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-deliver-item::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0; opacity: 0.6;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 24px 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; }
+.footer-copy span { color: var(--gold); }
+.footer-legal { display: flex; gap: 24px; list-style: none; }
+.footer-legal a { font-size: 11px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--gold); }
+
+/* WHATSAPP FLOAT + BACK TO TOP */
+.whatsapp-float {
+  position: fixed; bottom: 32px; right: 32px; z-index: 200;
+  width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+  transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+}
+.whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.6); }
+.whatsapp-float:active { transform: scale(0.97); }
+.whatsapp-float svg { width: 28px; height: 28px; }
+.back-to-top {
+  position: fixed; bottom: 100px; right: 32px; z-index: 198;
+  width: 44px; height: 44px; background: rgba(18,18,18,0.88);
+  border: 1px solid rgba(255,204,0,0.2); border-radius: 50%;
+  color: var(--gold); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(12px); transition: all 0.35s ease;
+  backdrop-filter: blur(8px);
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover { background: var(--gold); color: var(--black); border-color: var(--gold); transform: translateY(-2px); }
+.back-to-top svg { width: 18px; height: 18px; stroke: currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { opacity: 1; transform: none; transition: none; }
+  .btn-primary::before { transition: none; }
+  .skel-pulse, .skel .prod-visual { animation: none; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1100px) {
+  nav { padding: 20px 30px; }
+  .catalog-header { padding: 140px 30px 60px; }
+  .filter-section { padding: 20px 30px; }
+  .catalog-section { padding: 40px 30px 80px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 30px; }
+  .footer-bottom { padding: 20px 30px; flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 900px) {
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  nav { padding: 16px 20px; }
+}
+@media (max-width: 768px) {
+  .catalog-header { padding: 120px 20px 48px; }
+  .filter-section { padding: 16px 20px; top: 65px; }
+  .catalog-section { padding: 32px 20px 64px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
+  .footer-bottom { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .whatsapp-float { bottom: 16px; right: 16px; }
+  .back-to-top { bottom: 80px; right: 16px; }
+}
+@media (max-width: 540px) {
+  .catalog-grid { grid-template-columns: 1fr; }
+  nav { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Ir para o conteúdo</a>
+<div id="progress-bar"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-mobile-overlay" id="navOverlay" role="dialog" aria-label="Menu de navegação">
+  <button class="nav-close" id="navClose" aria-label="Fechar menu">✕</button>
+  <ul class="nav-mobile-links">
+    <li><a href="quasar-barber.html">Home</a></li>
+    <li><a href="quasar-barber.html#produtos">Produtos</a></li>
+    <li><a href="catalogo.html" style="color:var(--gold)">Catálogo</a></li>
+    <li><a href="quasar-barber.html#protocolo">Protocolo</a></li>
+    <li><a href="quasar-barber.html#sobre">Sobre</a></li>
+    <li><a href="quasar-barber.html#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5599992007182" class="btn-primary">
+    <span>Fazer Pedido</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" role="navigation" aria-label="Navegação principal">
+  <a href="quasar-barber.html" class="nav-logo" aria-label="Quasar Barber — página inicial">QUASAR<span>.</span></a>
+  <ul class="nav-links" role="list">
+    <li><a href="quasar-barber.html">Home</a></li>
+    <li><a href="quasar-barber.html#produtos">Produtos</a></li>
+    <li><a href="catalogo.html" class="active">Catálogo</a></li>
+    <li><a href="quasar-barber.html#protocolo">Protocolo</a></li>
+    <li><a href="quasar-barber.html#sobre">Sobre</a></li>
+    <li><a href="quasar-barber.html#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5599992007182" class="nav-cta">Fazer Pedido</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+
+<!-- PAGE HEADER -->
+<header class="catalog-header">
+  <div class="catalog-header-content">
+    <div class="section-label fade-up">
+      <span class="section-label-line"></span>
+      <span>Fox For Men · QOD Barber Shop</span>
+    </div>
+    <h1 class="catalog-title fade-up" style="--delay:0.08s">
+      Catálogo<br><em>Completo</em>
+    </h1>
+    <p class="catalog-subtitle fade-up" style="--delay:0.16s">
+      Todos os produtos disponíveis para entrega em Codó e região. Clique em qualquer item para pedir direto no WhatsApp.
+    </p>
+  </div>
+  <div class="catalog-header-decor" aria-hidden="true">Q</div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-section" role="navigation" aria-label="Filtrar por categoria">
+  <div class="filter-bar" id="filter-bar" role="list" aria-label="Categorias">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<!-- CATALOG -->
+<section class="catalog-section">
+  <div class="catalog-meta">
+    <span class="catalog-count" id="prod-count" aria-live="polite" aria-atomic="true"></span>
+  </div>
+  <div class="catalog-grid" id="produtos-grid" role="list" aria-label="Produtos">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">QUASAR<span>.</span></div>
+      <p class="footer-tagline">Distribuidora especializada em produtos profissionais para barba, cabelo e cuidados masculinos no interior do Maranhão.</p>
+      <div class="footer-contact">
+        <a href="https://wa.me/5599992007182">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          WhatsApp: (99) 99200-7182
+        </a>
+        <a href="https://instagram.com/quasar_barber">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+          @quasar_barber
+        </a>
+        <span class="footer-contact-span">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Codó, Maranhão
+        </span>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navegação</div>
+      <ul class="footer-links">
+        <li><a href="quasar-barber.html">Home</a></li>
+        <li><a href="catalogo.html">Catálogo completo</a></li>
+        <li><a href="quasar-barber.html#protocolo">Protocolo Quasar</a></li>
+        <li><a href="quasar-barber.html#sobre">Sobre nós</a></li>
+        <li><a href="quasar-barber.html#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Linhas</div>
+      <ul class="footer-links">
+        <li><a href="catalogo.html">Fox For Men</a></li>
+        <li><a href="catalogo.html">QOD Barber Shop</a></li>
+        <li><a href="catalogo.html">Óleos para barba</a></li>
+        <li><a href="catalogo.html">Kits premium</a></li>
+        <li><a href="catalogo.html">Pomadas capilares</a></li>
+        <li><a href="catalogo.html">Skincare masculino</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Pagamento</div>
+      <div class="footer-payments">
+        <span class="pay-tag">Pix</span>
+        <span class="pay-tag">Cartão</span>
+        <span class="pay-tag">Dinheiro</span>
+        <span class="pay-tag">Boleto</span>
+      </div>
+      <div class="footer-deliver">
+        <div class="footer-col-title" style="margin-top:32px;margin-bottom:12px;">Entrega</div>
+        <div class="footer-deliver-item">Entrega grátis em Codó</div>
+        <div class="footer-deliver-item">Envio para toda a região</div>
+        <div class="footer-deliver-item">Pedidos via WhatsApp</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 <span>Quasar Barber</span> — Todos os direitos reservados</span>
+    <ul class="footer-legal">
+      <li><a href="#">Política de privacidade</a></li>
+      <li><a href="#">Termos de uso</a></li>
+      <li><a href="#">Trocas e devoluções</a></li>
+    </ul>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<a href="https://wa.me/5599992007182?text=Olá!+Vim+pelo+catálogo+da+Quasar+Barber" class="whatsapp-float" title="Fale conosco pelo WhatsApp" aria-label="Fale conosco pelo WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+(function () {
+  'use strict';
+
+  const SUPABASE_URL = 'https://ylbajgyajkbacsqaphyn.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlsYmFqZ3lhamtiYWNzcWFwaHluIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0NDc2MjIsImV4cCI6MjA3OTAyMzYyMn0.1D62gdGKB_Ai_79RY6nypED9DQ4OppRi20Javu4-bCE';
+  const WA = '5599992007182';
+
+  const CAT_LABELS = {
+    'oleo': 'Óleos', 'óleo': 'Óleos', 'shampoo': 'Shampoo',
+    'balm': 'Balm', 'kit': 'Kits', 'pomada': 'Pomadas',
+    'pos-barba': 'Pós-barba', 'skincare': 'Skincare', 'outros': 'Outros',
+  };
+
+  function labelCat(cat) {
+    const key = (cat || '').toLowerCase();
+    return CAT_LABELS[key] || key.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  let activeCat = 'todos';
+  let allProducts = [];
+
+  // ── Supabase fetch ──────────────────────────────────────────────────
+  async function fetchProducts() {
+    const url =
+      `${SUPABASE_URL}/rest/v1/produtos` +
+      `?select=id,nome,categoria,unidade,estoque,preco,imagem_url,created_at&order=nome.asc`;
+
+    const res = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
+    });
+
+    if (!res.ok) {
+      let detail = '';
+      try { detail = (await res.json()).message || ''; } catch (_) {}
+      throw new Error(detail || `HTTP ${res.status}`);
+    }
+    return res.json();
+  }
+
+  // ── Helpers ─────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function formatPrice(p) {
+    return 'R$ ' +
+      Number(p).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function waLink(nome) {
+    return `https://wa.me/${WA}?text=${encodeURIComponent('Olá! Quero o produto: ' + nome)}`;
+  }
+
+  // ── Skeleton ─────────────────────────────────────────────────────────
+  function renderSkeleton() {
+    const grid = document.getElementById('produtos-grid');
+    const card = `
+      <div class="prod-card skel" aria-hidden="true">
+        <div class="prod-visual"></div>
+        <div class="prod-info">
+          <div class="skel-line skel-pulse w35"></div>
+          <div class="skel-line skel-pulse w80"></div>
+          <div class="skel-line skel-pulse w65" style="margin-bottom:18px"></div>
+          <div class="prod-footer">
+            <div class="skel-line skel-pulse w50" style="margin-bottom:0;height:22px;"></div>
+            <div class="skel-btn skel-pulse"></div>
+          </div>
+        </div>
+      </div>`;
+    grid.innerHTML = card.repeat(8);
+  }
+
+  // ── Build filters ────────────────────────────────────────────────────
+  function buildFilters() {
+    const cats = [
+      'todos',
+      ...[...new Set(allProducts.map(p => p.categoria).filter(Boolean))].sort(),
+    ];
+    const filterBar = document.getElementById('filter-bar');
+
+    filterBar.innerHTML = cats.map(c => {
+      const cnt = c === 'todos'
+        ? allProducts.length
+        : allProducts.filter(p => p.categoria === c).length;
+      const label = c === 'todos' ? 'Todos' : labelCat(c);
+      return `
+        <button class="filter-btn${c === activeCat ? ' active' : ''}"
+                data-cat="${esc(c)}" role="listitem"
+                aria-pressed="${c === activeCat}">
+          ${esc(label)}
+          <span class="filter-count">${cnt}</span>
+        </button>`;
+    }).join('');
+
+    filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCat = btn.dataset.cat;
+        filterBar.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        renderProducts(allProducts);
+      });
+    });
+  }
+
+  // ── Render products ──────────────────────────────────────────────────
+  function renderProducts(products) {
+    const grid = document.getElementById('produtos-grid');
+    const countEl = document.getElementById('prod-count');
+
+    const filtered = activeCat === 'todos'
+      ? products
+      : products.filter(p => p.categoria === activeCat);
+
+    const n = filtered.length;
+    countEl.textContent = `${n} produto${n !== 1 ? 's' : ''}`;
+
+    if (n === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                 stroke-linecap="round" stroke-linejoin="round" width="44" height="44">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+          </div>
+          <div class="empty-title">Nenhum produto nesta categoria</div>
+          <div class="empty-text">Em breve novos produtos serão adicionados.</div>
+          <a href="${waLink('informações sobre produtos')}" target="_blank" rel="noopener"
+             class="btn-primary" style="margin-top:28px;">
+            <span>Perguntar no WhatsApp</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>`;
+      return;
+    }
+
+    const now = new Date();
+    const weekStart = new Date(now);
+    weekStart.setHours(0, 0, 0, 0);
+    weekStart.setDate(now.getDate() - now.getDay()); // domingo da semana atual
+
+    grid.innerHTML = filtered.map((p, i) => {
+      const delay = Math.min(i, 7) * 0.055;
+      const initial = esc((p.nome || 'Q').trim()[0].toUpperCase());
+      const esgotado = p.estoque !== null && p.estoque !== undefined && Number(p.estoque) === 0;
+      const novidade = !esgotado && p.created_at && new Date(p.created_at) >= weekStart;
+      const hasImg = p.imagem_url && p.imagem_url.trim();
+
+      return `
+        <div class="prod-card fade-up" style="--delay:${delay}s" role="listitem">
+          <div class="prod-spotlight" aria-hidden="true"></div>
+          <div class="prod-visual${hasImg ? ' has-img' : ''}">
+            ${esgotado ? '<div class="prod-badge prod-badge-out">Esgotado</div>' : ''}
+            ${novidade ? '<div class="prod-badge prod-badge-new">Novidade</div>' : ''}
+            ${hasImg ? `<img src="${esc(p.imagem_url)}" alt="${esc(p.nome)}" loading="lazy"
+                onload="this.classList.add('loaded')"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''}
+            <div class="prod-img-fallback" style="${hasImg ? 'display:none' : ''}" aria-hidden="true"><span>${initial}</span></div>
+          </div>
+          <div class="prod-info">
+            <div class="prod-brand">${esc(labelCat(p.categoria))}</div>
+            <div class="prod-name">${esc(p.nome)}</div>
+            ${p.unidade ? `<div class="prod-unidade">${esc(p.unidade)}</div>` : ''}
+            <div class="prod-footer">
+              <div class="prod-price">${formatPrice(p.preco)}</div>
+              ${esgotado
+                ? `<span class="prod-buy-out" aria-disabled="true">Esgotado</span>`
+                : `<a href="${waLink(p.nome)}" target="_blank" rel="noopener"
+                      class="prod-buy" aria-label="Pedir ${esc(p.nome)} pelo WhatsApp">Pedir</a>`
+              }
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    attachSpotlight();
+    observeFadeUp();
+  }
+
+  // ── Error state ──────────────────────────────────────────────────────
+  function renderError(msg) {
+    document.getElementById('prod-count').textContent = '';
+    document.getElementById('produtos-grid').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon" style="color:rgba(224,82,82,0.4)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+               stroke-linecap="round" stroke-linejoin="round" width="44" height="44">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div class="empty-title" style="color:#e05252">Erro ao carregar produtos</div>
+        <div class="empty-text">${esc(msg) || 'Verifique sua conexão e tente novamente.'}</div>
+        <button class="btn-primary" style="margin-top:28px;" onclick="location.reload()">
+          <span>Tentar novamente</span>
+        </button>
+      </div>`;
+  }
+
+  // ── Spotlight ─────────────────────────────────────────────────────────
+  function attachSpotlight() {
+    document.querySelectorAll('.prod-card:not(.skel)').forEach(card => {
+      const spot = card.querySelector('.prod-spotlight');
+      if (!spot) return;
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        spot.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        spot.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+  }
+
+  // ── IntersectionObserver for fade-up ────────────────────────────────
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+
+  function observeFadeUp() {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(el => fadeObs.observe(el));
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────
+  async function init() {
+    renderSkeleton();
+    document.getElementById('filter-bar').innerHTML =
+      [72, 56, 80, 64].map(w =>
+        `<div class="skel-pulse" style="width:${w}px;height:38px;opacity:0.35;border-radius:4px;flex-shrink:0;"></div>`
+      ).join('');
+
+    try {
+      allProducts = await fetchProducts();
+      buildFilters();
+      renderProducts(allProducts);
+    } catch (e) {
+      renderError(e.message);
+    }
+  }
+
+  // ── Custom cursor ─────────────────────────────────────────────────────
+  if (window.matchMedia('(hover: hover)').matches) {
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    (function animateRing() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '50px'; ring.style.height = '50px'; ring.style.borderColor = 'rgba(255,204,0,0.8)'; });
+      el.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; ring.style.borderColor = 'rgba(255,204,0,0.5)'; });
+    });
+  }
+
+  // ── Scroll: nav + progress + back-to-top ─────────────────────────────
+  const mainNav   = document.getElementById('mainNav');
+  const progressBar = document.getElementById('progress-bar');
+  const backToTop = document.getElementById('backToTop');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    mainNav.classList.toggle('scrolled', y > 60);
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (total > 0 ? (y / total) * 100 : 0) + '%';
+    backToTop.classList.toggle('visible', y > 500);
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ── Mobile nav ────────────────────────────────────────────────────────
+  const hamburger = document.getElementById('navHamburger');
+  const overlay   = document.getElementById('navOverlay');
+  const closeBtn  = document.getElementById('navClose');
+  hamburger.addEventListener('click', () => { overlay.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); });
+  closeBtn.addEventListener('click',  () => { overlay.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); });
+  overlay.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => { overlay.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); })
+  );
+
+  // ── Header fade-up ────────────────────────────────────────────────────
+  observeFadeUp();
+
+  // ── Kick off ──────────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+</body>
+</html>
