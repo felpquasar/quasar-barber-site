@@ -271,6 +271,13 @@ nav.scrolled { background: rgba(10,10,10,0.98); backdrop-filter: blur(14px); }
   background: rgba(0,200,100,0.12); color: #00c864;
   border: 1px solid rgba(0,200,100,0.28);
 }
+.prod-badge-hot {
+  left: auto; right: 14px;
+  background: var(--gold); color: var(--black);
+}
+.prod-preco-wrap { display: flex; flex-direction: column; gap: 2px; }
+.prod-preco-riscado { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; color: var(--text-dim); text-decoration: line-through; letter-spacing: 0.05em; }
+.prod-preco-final { color: var(--gold); }
 .prod-unidade {
   font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
   font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
@@ -689,7 +696,7 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
   async function fetchProducts() {
     const url =
       `${SUPABASE_URL}/rest/v1/produtos` +
-      `?select=id,nome,categoria,unidade,estoque,preco,imagem_url,created_at&order=nome.asc`;
+      `?select=id,nome,categoria,unidade,estoque,preco,desconto,tag_novidade,tag_mais_vendido,imagem_url,created_at&order=nome.asc`;
 
     const res = await fetch(url, {
       headers: {
@@ -821,16 +828,21 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
     grid.innerHTML = filtered.map((p, i) => {
       const delay = Math.min(i, 7) * 0.055;
       const initial = esc((p.nome || 'Q').trim()[0].toUpperCase());
-      const esgotado = p.estoque !== null && p.estoque !== undefined && Number(p.estoque) === 0;
-      const novidade = !esgotado && p.created_at && new Date(p.created_at) >= weekStart;
-      const hasImg = p.imagem_url && p.imagem_url.trim();
+      const esgotado    = p.estoque === 0;
+      const novaAuto    = p.created_at && new Date(p.created_at) >= weekStart;
+      const novidade    = !esgotado && (p.tag_novidade === true || (p.tag_novidade !== false && novaAuto));
+      const maisVendido = !novidade && p.tag_mais_vendido;
+      const desc        = Number(p.desconto) || 0;
+      const precoFinal  = desc > 0 ? p.preco * (1 - desc / 100) : null;
+      const hasImg      = p.imagem_url && p.imagem_url.trim();
 
       return `
         <div class="prod-card fade-up" style="--delay:${delay}s" role="listitem">
           <div class="prod-spotlight" aria-hidden="true"></div>
           <div class="prod-visual${hasImg ? ' has-img' : ''}">
-            ${esgotado ? '<div class="prod-badge prod-badge-out">Esgotado</div>' : ''}
-            ${novidade ? '<div class="prod-badge prod-badge-new">Novidade</div>' : ''}
+            ${esgotado    ? '<div class="prod-badge prod-badge-out">Esgotado</div>'  : ''}
+            ${novidade    ? '<div class="prod-badge prod-badge-new">Novidade</div>'   : ''}
+            ${maisVendido ? '<div class="prod-badge prod-badge-hot">Mais Vendido</div>' : ''}
             ${hasImg ? `<img src="${esc(p.imagem_url)}" alt="${esc(p.nome)}" loading="lazy"
                 onload="this.classList.add('loaded')"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''}
@@ -841,7 +853,13 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
             <div class="prod-name">${esc(p.nome)}</div>
             ${p.unidade ? `<div class="prod-unidade">${esc(p.unidade)}</div>` : ''}
             <div class="prod-footer">
-              <div class="prod-price">${formatPrice(p.preco)}</div>
+              <div class="${precoFinal ? 'prod-preco-wrap' : ''}">
+                ${precoFinal
+                  ? `<span class="prod-preco-riscado">${formatPrice(p.preco)}</span>
+                     <span class="prod-price prod-preco-final">${formatPrice(precoFinal)}</span>`
+                  : `<div class="prod-price">${formatPrice(p.preco)}</div>`
+                }
+              </div>
               ${esgotado
                 ? `<span class="prod-buy-out" aria-disabled="true">Esgotado</span>`
                 : `<a href="${waLink(p.nome)}" target="_blank" rel="noopener"
