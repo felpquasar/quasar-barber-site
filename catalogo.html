@@ -696,7 +696,8 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
   async function fetchProducts() {
     const url =
       `${SUPABASE_URL}/rest/v1/produtos` +
-      `?select=id,nome,categoria,unidade,estoque,preco,desconto,tag_novidade,tag_mais_vendido,imagem_url,created_at&order=nome.asc`;
+      `?select=id,nome,categoria,unidade,estoque,preco,desconto,tag_novidade,tag_mais_vendido,imagem_url,created_at` +
+      `&ativo=eq.true&order=nome.asc`;
 
     const res = await fetch(url, {
       headers: {
@@ -710,7 +711,17 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
       try { detail = (await res.json()).message || ''; } catch (_) {}
       throw new Error(detail || `HTTP ${res.status}`);
     }
-    return res.json();
+    return dedupeByName(await res.json());
+  }
+
+  function dedupeByName(products) {
+    const seen = new Map();
+    for (const p of products) {
+      const key = (p.nome || '').trim().toLowerCase();
+      const prev = seen.get(key);
+      if (!prev || (!prev.imagem_url && p.imagem_url)) seen.set(key, p);
+    }
+    return [...seen.values()];
   }
 
   // ── Helpers ─────────────────────────────────────────────────────────
@@ -837,7 +848,7 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
       const hasImg      = p.imagem_url && p.imagem_url.trim();
 
       return `
-        <div class="prod-card fade-up" style="--delay:${delay}s" role="listitem">
+        <div class="prod-card fade-up" style="--delay:${delay}s" role="listitem" ${esgotado ? '' : `data-wa-link="${waLink(p.nome)}"`}>
           <div class="prod-spotlight" aria-hidden="true"></div>
           <div class="prod-visual${hasImg ? ' has-img' : ''}">
             ${esgotado    ? '<div class="prod-badge prod-badge-out">Esgotado</div>'  : ''}
@@ -871,7 +882,18 @@ footer { background: var(--black-2); border-top: 1px solid rgba(255,204,0,0.08);
     }).join('');
 
     attachSpotlight();
+    attachCardClick();
     observeFadeUp();
+  }
+
+  // ── Whole-card click (card has cursor:pointer, must actually navigate) ─
+  function attachCardClick() {
+    document.querySelectorAll('.prod-card[data-wa-link]').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('a')) return; // let the Pedir link handle its own click
+        window.open(card.dataset.waLink, '_blank', 'noopener');
+      });
+    });
   }
 
   // ── Error state ──────────────────────────────────────────────────────
